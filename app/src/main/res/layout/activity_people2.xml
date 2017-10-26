@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#FFF">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="243dp"
+        android:background="@drawable/gradient"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp"
-        android:background="@drawable/gradient">
+        android:id="@+id/constraintLayout">
 
         <ImageButton
             android:id="@+id/imageButton4"
@@ -20,21 +22,20 @@
             android:layout_height="120dp"
             android:layout_below="@+id/user_profile_short_bio"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/profile_circular_border_imageview"
             android:elevation="5dp"
             android:padding="20dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile1"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/textView11"
-            android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView11"
@@ -51,7 +52,7 @@
             app:layout_constraintRight_toRightOf="parent" />
 
         <ImageButton
-            android:id="@+id/settingsButton"
+            android:id="@+id/settingButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="179dp"
@@ -69,129 +70,57 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <TableRow
+    <ImageView
+        android:id="@+id/imageView5"
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" >
+        android:layout_height="87dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/constraintLayout"
+        app:srcCompat="@drawable/labels" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView24"
+        android:layout_alignBottom="@+id/textView24"
+        android:layout_marginLeft="88dp"
+        android:layout_marginStart="88dp"
+        android:layout_toEndOf="@+id/textView25"
+        android:layout_toRightOf="@+id/textView25"
+        android:text="64" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="81dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/overdo"
-                android:layout_marginRight="16dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintLeft_toRightOf="@+id/imageView2"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintHorizontal_bias="1.0" />
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/constraintLayout"
+        android:layout_marginLeft="63dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="17dp"
+        android:text="180" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="95dp"
-                android:layout_height="61dp"
-                app:srcCompat="@drawable/completed"
-                android:layout_marginLeft="2dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="0dp"
-                app:layout_constraintRight_toLeftOf="@+id/imageView2"
-                android:layout_marginRight="8dp"
-                app:layout_constraintHorizontal_bias="0.0" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="87dp"
-                android:layout_height="53dp"
-                app:srcCompat="@drawable/snoozed"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintVertical_bias="0.0"
-                android:layout_marginRight="148dp"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintHorizontal_bias="0.833" />
-        </android.support.constraint.ConstraintLayout>
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="252dp">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="127dp"
-                android:layout_marginStart="124dp"
-                android:layout_marginTop="8dp"
-                android:text="21"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.444" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="64"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.712"
-                app:layout_constraintLeft_toRightOf="@+id/textView9"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.444" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="37dp"
-                android:layout_marginStart="37dp"
-                android:layout_marginTop="8dp"
-                android:text="180"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.444" />
-        </android.support.constraint.ConstraintLayout>
-
-    </TableRow>
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView18"
+        android:layout_alignBottom="@+id/textView18"
+        android:layout_centerHorizontal="true"
+        android:text="180" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="236dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1.44"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:layout_weight="1.44">
+        tools:layout_editor_absoluteY="8dp">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/profileStats"
@@ -201,4 +130,4 @@
         </com.github.mikephil.charting.charts.PieChart>
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
