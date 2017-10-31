@@ -3,32 +3,58 @@ package com.example.mohammedabu.dutyhelper.Authentication;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.mohammedabu.dutyhelper.MainActivity;
 import com.example.mohammedabu.dutyhelper.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
     private AppCompatButton btnSignup;
     private TextView loginLink;
+    private FirebaseAuth mAuth;
+    private EditText userEmail;
+    private  EditText userPassword;
+    private EditText userName;
+    private EditText userMobile;
+    private EditText userReenteredPassword;
+    private EditText userAddress;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         Log.d(TAG, "onCreate started");
 
+        userEmail = (EditText)findViewById(R.id.input_email);
+        userPassword = (EditText)findViewById(R.id.input_password);
+        userName = (EditText)findViewById(R.id.input_name);
+        userMobile = (EditText)findViewById(R.id.input_mobile);
+        userReenteredPassword = (EditText)findViewById(R.id.input_reEnterPassword);
+        userAddress = (EditText)findViewById(R.id.input_address);
+
+        mAuth = FirebaseAuth.getInstance();
+
         btnSignup = (AppCompatButton) findViewById(R.id.btn_signup);
         btnSignup.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                signup();
-                Intent registerIntent = new Intent(RegisterActivity.this, Login.class);
-                RegisterActivity.this.startActivity(registerIntent);
+                //signup();
+                registerUser();
             }
         });
 
@@ -66,6 +92,57 @@ public class RegisterActivity extends AppCompatActivity {
                 }, 3000);
     }
 
+    public void registerUser(){
+        String Email = userEmail.getText().toString().trim() ;
+        String Password= userPassword.getText().toString().trim() ;
+        if (TextUtils.isEmpty(Email)){
+            Toast.makeText(this, "Email field is empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(Password)){
+            Toast.makeText(this, "Password field is empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        mAuth.createUserWithEmailAndPassword(Email, Password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        try{
+                            //check if successful
+                            if (task.isSuccessful()){
+                                //User is successfully registered to the data base
+                                /**
+                                //the dialog that shows up when the user creates an account
+                                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this,
+                                        R.style.AppTheme_Dark_Dialog);
+                                progressDialog.setIndeterminate(true);
+                                progressDialog.setMessage("Creating Account...");
+                                progressDialog.show();
+
+
+                                new android.os.Handler().postDelayed(
+                                        new Runnable() {
+                                            public void run() {
+                                                progressDialog.dismiss();
+                                            }
+                                        }, 3000);
+                                 **/
+                                //Create the account successful and take user to the Login screen
+                                finish();
+                                Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext(), Login.class));
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+    }
 }
 
 

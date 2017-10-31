@@ -49,7 +49,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/userEmail"
+            android:id="@+id/emailField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -63,7 +63,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/userPassword"
+            android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
