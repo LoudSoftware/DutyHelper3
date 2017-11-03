@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DutyHelper3.iml" filepath="$PROJECT_DIR$/.idea/DutyHelper3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DutyHelper3.iml" filepath="$PROJECT_DIR$/DutyHelper3.iml" />
+      <module fileurl="file://C:\Users\nicoz\StudioProjects\DutyHelper3\.idea\DutyHelper3.iml" filepath="C:\Users\nicoz\StudioProjects\DutyHelper3\.idea\DutyHelper3.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
