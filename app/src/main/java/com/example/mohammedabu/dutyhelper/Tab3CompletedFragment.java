@@ -6,19 +6,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mohammedabu.dutyhelper.R;
 
 /**
- * Created by Mohammed on 25/09/2017.
+ * Created by User on 2/28/2017.
  */
 
-public class TasksFragment extends Fragment {
+public class Tab3CompletedFragment extends Fragment {
+    private static final String TAG = "Tab3CompletedFragment";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_tasks,container, false);
+        View view = inflater.inflate(R.layout.tab3_completed,container,false);
         return view;
     }
-
 }

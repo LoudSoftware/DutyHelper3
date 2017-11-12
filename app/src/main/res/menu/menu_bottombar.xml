@@ -5,17 +5,17 @@
         android:icon="@drawable/ic_calender"
         android:title="Calender"/>
     <item
-        android:id="@+id/bottom_bar_icon_search"
-        android:icon="@drawable/ic_search"
-        android:title="Search"/>
+        android:id="@+id/bottom_bar_icon_tasks"
+        android:icon="@drawable/ic_task"
+        android:title="Tasks"/>
     <item
         android:id="@+id/bottom_bar_icon_create"
         android:icon="@drawable/ic_create"
         android:title="Create"/>
     <item
-        android:id="@+id/bottom_bar_icon_tasks"
-        android:icon="@drawable/ic_task"
-        android:title="Tasks"/>
+        android:id="@+id/bottom_bar_icon_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"/>
     <item
         android:id="@+id/bottom_bar_icon_profile"
         android:icon="@drawable/ic_profile"

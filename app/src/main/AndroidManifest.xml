@@ -23,7 +23,10 @@
         <activity
             android:name=".ProfileSettingsActivity"
             android:label="@string/title_activity_profile_settings" />
-        <activity android:name=".profileSettings"></activity>
+        <activity
+            android:name=".activity_tasks"
+            android:label="@string/title_activity_tasks2"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

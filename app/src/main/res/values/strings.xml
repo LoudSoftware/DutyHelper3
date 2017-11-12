@@ -7,6 +7,14 @@
     <string name="loginButton">Login</string>
     <string name="createAccountText">No account yet? Create one</string>
 
+    <!-- Temporary storage for the "Users" in the application-->
+    <string-array name="names">
+        <item> Miguel </item>
+        <item> Alexandra </item>
+        <item> Xavier </item>
+        <item> Alexander </item>
+    </string-array>
+
 
     <string name="next">Next</string>
     <string name="skip">Skip</string>
@@ -125,4 +133,11 @@
     <string name="doNow">Do it Now!</string>
     <string name="recurringEvent">Recurring Event?</string>
     <string name="taskHint">Type in your task...</string>
+    <string name="AssignTo">Assign to</string>
+    <string name="rewardsTitleProfile">XP</string>
+    <string name="title_activity_tasks2">activity_tasks2</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

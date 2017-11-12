@@ -3,7 +3,6 @@ package com.example.mohammedabu.dutyhelper;
 import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.mohammedabu.dutyhelper.Authentication.Login;
@@ -31,8 +30,8 @@ public class MainActivity extends ActionBarActivity {
                     CalenderFragment calenderFragment = new CalenderFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,calenderFragment).commit();
                 } else if (menuItemId == R.id.bottom_bar_icon_search){
-                    SearchFragment searchFragment = new SearchFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,searchFragment).commit();
+                    RewardFragment rewardFragment = new RewardFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, rewardFragment).commit();
                 } else if(menuItemId == R.id.bottom_bar_icon_create){
                     CreateFragment createFragment = new CreateFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,createFragment).commit();

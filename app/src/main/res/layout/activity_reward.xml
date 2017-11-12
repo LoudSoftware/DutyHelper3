@@ -6,7 +6,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="This is the Search fragment"
+        android:text="This is the Rewards fragment"
         android:textSize="36dp"
         android:textStyle="bold"
         android:typeface="serif"

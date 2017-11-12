@@ -3,7 +3,6 @@ package com.example.mohammedabu.dutyhelper;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,7 @@ public class PeopleFragment extends Fragment {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent settingsClick = new Intent(getActivity(), profileSettings.class);
+                Intent settingsClick = new Intent(getActivity(), ProfileSettingsActivity.class);
                 getActivity().startActivity(settingsClick);
             }
         });
