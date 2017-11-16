@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,9 @@ public class PeopleFragment extends Fragment {
 
     ImageButton settingsButton;
     PieChart pieChart;
+    private FirebaseAuth mAuth;
+    TextView fullName;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,13 +47,8 @@ public class PeopleFragment extends Fragment {
             }
         });
 
-        /*
-          Supposed to change the name in the profile page to the current user's name.
-         */
-        TextView fullName = (TextView) view.findViewById(R.id.userProfileFullName);
-        UserHelper userHelper = new UserHelper(FirebaseAuth.getInstance());
-        fullName.setAllCaps(true);
-        fullName.setText(userHelper.getName());
+        fullName = (TextView) view.findViewById(R.id.userProfileFullName);
+        mAuth = FirebaseAuth.getInstance();
 
 
 
@@ -88,6 +87,26 @@ public class PeopleFragment extends Fragment {
         return view;
 
 
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    /**
+     * Updates the view according to the authentication status.
+     * @param user the current FirebaseUser
+     */
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            fullName.setAllCaps(true);
+            fullName.setText(user.getDisplayName());
+        }
     }
 
 
