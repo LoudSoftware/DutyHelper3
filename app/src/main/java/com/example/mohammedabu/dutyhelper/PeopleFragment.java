@@ -7,14 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.mohammedabu.dutyhelper.dbHelpers.UserHelper;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -39,9 +43,18 @@ public class PeopleFragment extends Fragment {
             }
         });
 
+        /*
+          Supposed to change the name in the profile page to the current user's name.
+         */
+        TextView fullName = (TextView) view.findViewById(R.id.userProfileFullName);
+        UserHelper userHelper = new UserHelper(FirebaseAuth.getInstance());
+        fullName.setAllCaps(true);
+        fullName.setText(userHelper.getName());
 
-        /**
-         * The code below, until line 61 is to create the Pie chart seen in activity_people2.xml
+
+
+        /*
+          The code below, until line 61 is to create the Pie chart seen in activity_people2.xml
          */
         pieChart = (PieChart) view.findViewById(R.id.profileStats);
         pieChart.setUsePercentValues(true);
