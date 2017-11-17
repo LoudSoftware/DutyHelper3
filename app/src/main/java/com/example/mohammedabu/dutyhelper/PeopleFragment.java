@@ -52,6 +52,7 @@ public class PeopleFragment extends Fragment {
 
 
 
+
         /*
           The code below, until line 61 is to create the Pie chart seen in activity_people2.xml
          */
@@ -104,7 +105,6 @@ public class PeopleFragment extends Fragment {
      */
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            fullName.setAllCaps(true);
             fullName.setText(user.getDisplayName());
         }
     }
