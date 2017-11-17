@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -27,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextView loginLink;
     private FirebaseAuth mAuth;
     private EditText userEmail;
-    private  EditText userPassword;
+    private EditText userPassword;
     private EditText userName;
     private EditText userMobile;
     private EditText userReenteredPassword;
@@ -40,17 +42,17 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         Log.d(TAG, "onCreate started");
 
-        userEmail = (EditText)findViewById(R.id.input_email);
-        userPassword = (EditText)findViewById(R.id.input_password);
-        userName = (EditText)findViewById(R.id.input_name);
-        userMobile = (EditText)findViewById(R.id.input_mobile);
-        userReenteredPassword = (EditText)findViewById(R.id.input_reEnterPassword);
-        userAddress = (EditText)findViewById(R.id.input_address);
+        userEmail = (EditText) findViewById(R.id.input_email);
+        userPassword = (EditText) findViewById(R.id.input_password);
+        userName = (EditText) findViewById(R.id.input_name);
+        userMobile = (EditText) findViewById(R.id.input_mobile);
+        userReenteredPassword = (EditText) findViewById(R.id.input_reEnterPassword);
+        userAddress = (EditText) findViewById(R.id.input_address);
 
         mAuth = FirebaseAuth.getInstance();
 
         btnSignup = (AppCompatButton) findViewById(R.id.btn_signup);
-        btnSignup.setOnClickListener(new View.OnClickListener(){
+        btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //signup();
@@ -58,8 +60,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        loginLink = (TextView)findViewById(R.id.link_login);
-        loginLink.setOnClickListener(new View.OnClickListener(){
+        loginLink = (TextView) findViewById(R.id.link_login);
+        loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent registerIntent = new Intent(RegisterActivity.this, Login.class);
@@ -69,12 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 
 
-    public void signup(){
+    public void signup() {
         Log.d(TAG, "Signup");
 
         final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this,
@@ -92,16 +92,21 @@ public class RegisterActivity extends AppCompatActivity {
                 }, 3000);
     }
 
-    public void registerUser(){
-        String Email = userEmail.getText().toString().trim() ;
-        String Password= userPassword.getText().toString().trim() ;
-        if (TextUtils.isEmpty(Email)){
+    public void registerUser() {
+        String Email = userEmail.getText().toString().trim();
+        String Password = userPassword.getText().toString().trim();
+        final String name = userName.getText().toString().trim();
+        if (TextUtils.isEmpty(Email)) {
             Toast.makeText(this, "Email field is empty", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if (TextUtils.isEmpty(Password)){
+        if (TextUtils.isEmpty(Password)) {
             Toast.makeText(this, "Password field is empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "Name field is empty", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -109,34 +114,53 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        try{
+                        try {
                             //check if successful
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 //User is successfully registered to the data base
                                 /**
-                                //the dialog that shows up when the user creates an account
-                                final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this,
-                                        R.style.AppTheme_Dark_Dialog);
-                                progressDialog.setIndeterminate(true);
-                                progressDialog.setMessage("Creating Account...");
-                                progressDialog.show();
+                                 //the dialog that shows up when the user creates an account
+                                 final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this,
+                                 R.style.AppTheme_Dark_Dialog);
+                                 progressDialog.setIndeterminate(true);
+                                 progressDialog.setMessage("Creating Account...");
+                                 progressDialog.show();
 
 
-                                new android.os.Handler().postDelayed(
-                                        new Runnable() {
-                                            public void run() {
-                                                progressDialog.dismiss();
-                                            }
-                                        }, 3000);
+                                 new android.os.Handler().postDelayed(
+                                 new Runnable() {
+                                 public void run() {
+                                 progressDialog.dismiss();
+                                 }
+                                 }, 3000);
                                  **/
                                 //Create the account successful and take user to the Login screen
                                 finish();
+
+                                // Adds additional user information
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(name)
+                                        .build();
+
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Log.d(TAG, "User profile updated.");
+                                                }
+                                            }
+                                        });
+
+
                                 Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), Login.class));
                             } else {
                                 Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
                             }
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
