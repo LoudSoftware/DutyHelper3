@@ -30,20 +30,20 @@
             android:padding="20dp"
             android:scaleType="centerCrop"
             android:src="@drawable/profile1"
-            app:layout_constraintBottom_toTopOf="@+id/textView11"
+            app:layout_constraintBottom_toTopOf="@+id/userProfileFullName"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/userProfileFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="43dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:text="Alexander Garzon"
+            android:text="@string/userFullName"
             android:textColor="#FFF"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
