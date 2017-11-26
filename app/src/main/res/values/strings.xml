@@ -15,6 +15,17 @@
         <item> Alexander </item>
     </string-array>
 
+    <!-- Points Associated per Task-->
+    <string-array name="points">
+        <item> 1 </item>
+        <item> 2 </item>
+        <item> 3 </item>
+        <item> 4 </item>
+        <item> 5 </item>
+    </string-array>
+
+
+    <string name="rewardsPageTitle">Rewards</string>
 
     <string name="next">Next</string>
     <string name="skip">Skip</string>
@@ -140,4 +151,5 @@
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="points_associated">Points associated</string>
 </resources>
