@@ -1,6 +1,8 @@
 package com.example.mohammedabu.dutyhelper;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,9 +33,9 @@ public class PeopleFragment extends Fragment {
 
     ImageButton settingsButton;
     PieChart pieChart;
+    ImageButton profileImage;
     private FirebaseAuth mAuth;
     TextView fullName;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,16 +48,15 @@ public class PeopleFragment extends Fragment {
                 getActivity().startActivity(settingsClick);
             }
         });
+        profileImage = (ImageButton) view.findViewById(R.id.imageButton4);
 
         fullName = (TextView) view.findViewById(R.id.userProfileFullName);
         mAuth = FirebaseAuth.getInstance();
 
-
-
-
-        /*
-          The code below, until line 61 is to create the Pie chart seen in activity_people2.xml
-         */
+      
+        /**
+         * The code below, until line 75 is to create the Pie chart seen in activity_people2.xml
+        **/
         pieChart = (PieChart) view.findViewById(R.id.profileStats);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
@@ -84,6 +85,11 @@ public class PeopleFragment extends Fragment {
         data.setValueTextColor(Color.YELLOW);
 
         pieChart.setData(data);
+
+       // byte[] byteArray = getArgument().getByteArrayExtra("image");
+       // Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
+
 
         return view;
 
