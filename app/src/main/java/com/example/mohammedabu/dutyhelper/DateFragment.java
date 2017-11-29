@@ -27,7 +27,7 @@ public class DateFragment extends DialogFragment implements DatePickerDialog.OnD
         populateSetDate(year, month+1, day);
     }
     public void populateSetDate(int year, int month, int day) {
-        TextView dob= (TextView)getActivity(). findViewById(R.id.dob);
-        dob.setText(day+"/"+month+"/"+year);
+        TextView taskDate= (TextView)getActivity(). findViewById(R.id.taskDate);
+        taskDate.setText(day+"/"+month+"/"+year);
     }
 }

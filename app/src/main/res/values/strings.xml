@@ -143,7 +143,6 @@
     <string name="nextWeek">Next Week</string>
     <string name="doNow">Do it Now!</string>
     <string name="recurringEvent">Recurring Event?</string>
-    <string name="taskHint">Type in your task...</string>
     <string name="AssignTo">Assign to</string>
     <string name="rewardsTitleProfile">XP</string>
     <string name="title_activity_tasks2">activity_tasks2</string>
@@ -153,4 +152,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="points_associated">Points associated</string>
     <string name="userFullName">John Doe</string>
+    <string name="descriptionHint">Add task notes</string>
+    <string name="taskHintName">Enter the task name</string>
 </resources>
