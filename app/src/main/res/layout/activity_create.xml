@@ -56,21 +56,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/datePrompt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:gravity="center"
-                android:text="Select a date:"
+                android:text="Select a date: "
                 android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
             <TextView
                 android:id="@+id/taskDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         </LinearLayout>
 
@@ -95,18 +96,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/imageButtonDatePicker"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
+                android:background="@drawable/button_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -129,6 +131,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
@@ -137,7 +140,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_marginStart="10dp"
-                android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="Select a time: "
                 android:textAppearance="@android:style/TextAppearance.Material.Medium" />
@@ -145,7 +147,8 @@
             <TextView
                 android:id="@+id/taskTime"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         </LinearLayout>
 
@@ -170,11 +173,21 @@
             <ImageButton
 
                 android:id="@+id/imageButtonTimePicker"
-                android:layout_width="86dp"
-                android:layout_height="86dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+                android:background="@drawable/button_style"
+                app:srcCompat="@android:drawable/ic_menu_recent_history" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_horizontal_margin"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -184,18 +197,24 @@
 
             <TextView
                 android:id="@+id/textView3"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="@string/AssignTo" />
+                android:text="@string/AssignTo"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
             <Spinner
                 android:id="@+id/create_UserSelection"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_horizontal_margin"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,16 +224,17 @@
 
             <TextView
                 android:id="@+id/textView598"
-                android:layout_width="243dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:text="Points Associated" />
+                android:text="Points Associated"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
             <Spinner
                 android:id="@+id/create_pointsAllocated"
                 android:layout_width="214dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -235,18 +255,29 @@
                 android:text="@string/recurringEvent"
                 android:textColor="#000000" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.02" />
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp">
+
 
             <Button
                 android:id="@+id/buttonCreate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/button_style"
                 android:text="@string/create" />
 
             <Button
@@ -254,6 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/button_style"
                 android:text="@android:string/cancel" />
         </LinearLayout>
     </LinearLayout>
