@@ -2,7 +2,9 @@ package com.example.mohammedabu.dutyhelper.Authentication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -52,7 +54,9 @@ public class Intro extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
     }
+
 
     public  void btnSkipClick(View v)
     {
