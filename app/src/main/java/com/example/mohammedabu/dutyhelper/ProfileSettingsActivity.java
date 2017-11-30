@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -20,6 +22,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
+
 //        loadButton = (Button)findViewById(R.id.buttonLoad);
 //        //profileImage = (ImageButton) view.findViewById(R.id.imageButton4);
 //        loadButton.setOnClickListener(new Button.OnClickListener(){
@@ -31,6 +34,20 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 //                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //                startActivityForResult(intent, 0);
 //            }});
+
+
+
+
+        // Makes the arrow image act as a back button.
+        ImageView backButton = (ImageView)findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
 //    @Override
