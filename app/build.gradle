@@ -24,8 +24,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-database:11.0.4'
-    implementation 'com.google.firebase:firebase-auth:11.6.0'
+    implementation 'com.google.firebase:firebase-database:11.6.2'
+    implementation 'com.google.firebase:firebase-auth:11.6.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -40,7 +40,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:support-v4:25.4.0'
     compile 'com.android.support:support-vector-drawable:25.4.0'
-    compile 'com.google.android.gms:play-services-auth:11.6.0'
+    compile 'com.google.android.gms:play-services-auth:11.6.2'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife:7.0.1'
 }
