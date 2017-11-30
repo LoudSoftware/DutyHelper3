@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
+import android.view.View;
 
 import com.example.mohammedabu.dutyhelper.Authentication.Login;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
 public class MainActivity extends ActionBarActivity {
+
 
     BottomBar bottomBar;
 
@@ -18,6 +21,9 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(this, Login.class);
+
+
+
         /**
          * The code below is to create the Bottom Navigation Bar, which appears in all the fragments.
          */
@@ -63,4 +69,5 @@ public class MainActivity extends ActionBarActivity {
         // Disable going back to the Login Screen from within the application
         moveTaskToBack(true);
     }
+
 }

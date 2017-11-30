@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +30,15 @@ import java.util.Calendar;
 public class CreateFragment extends Fragment {
     ImageButton datePicker;
     Button cancel;
+    Button create;
     ImageButton today;
     ImageButton nextWeek;
     ImageButton tomorrow;
     TextView date;
+
+    //creating objects to create a notification to the user.
+    NotificationCompat.Builder notification;
+    private static final int uniqueID = 45612;
 
     @Nullable
     @Override
@@ -46,7 +52,7 @@ public class CreateFragment extends Fragment {
         mySpinner.setAdapter(myAdapter);
 
         date = (TextView)view.findViewById(R.id.dob) ;
-
+        create = (Button)view.findViewById(R.id.buttonCreate);
         cancel = (Button)view.findViewById(R.id.buttonCancel);
         //navigating from this fragment page to the calendar page once the cancel button is clicked
         cancel.setOnClickListener(new View.OnClickListener() {

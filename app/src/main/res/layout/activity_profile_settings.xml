@@ -74,7 +74,7 @@
             android:layout_columnSpan="1"
             android:layout_row="0"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile2" />
 
         <ImageView
             android:id="@+id/teamid02"
@@ -84,7 +84,7 @@
             android:layout_columnSpan="1"
             android:layout_row="0"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile3" />
 
         <ImageView
             android:id="@+id/teamid03"
@@ -94,7 +94,7 @@
             android:layout_columnSpan="1"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile6" />
 
         <ImageView
             android:id="@+id/teamid04"
@@ -104,7 +104,7 @@
             android:layout_columnSpan="1"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile4" />
 
         <ImageView
             android:id="@+id/teamid05"
@@ -114,7 +114,7 @@
             android:layout_columnSpan="1"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile5" />
 
     </GridLayout>
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class activity_tasks extends AppCompatActivity {
 
-    private static final String TAG = "Task Activyt";
+    private static final String TAG = "Task Activity";
 
     private SectionsPageAdapter mSectionsPageAdapter;
 

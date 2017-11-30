@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
  * Created by Mohammed on 25/09/2017.
  */
 
-public class PeopleFragment extends Fragment {
+public class PeopleFragment extends Fragment implements View.OnClickListener {
 
     ImageButton settingsButton;
     PieChart pieChart;
@@ -33,16 +34,10 @@ public class PeopleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_people2, container, false);
-        settingsButton = (ImageButton) view.findViewById(R.id.settingButton);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent settingsClick = new Intent(getActivity(), ProfileSettingsActivity.class);
-                getActivity().startActivity(settingsClick);
-            }
-        });
-        profileImage = (ImageButton) view.findViewById(R.id.imageButton4);
-
+        settingsButton = (ImageButton)view.findViewById(R.id.settingButton);
+        settingsButton.setOnClickListener(this);
+        profileImage = (ImageButton)view.findViewById(R.id.profileImageButton);
+        profileImage.setOnClickListener(this);
 
         /**
          * The code below, until line 75 is to create the Pie chart seen in activity_people2.xml
@@ -79,11 +74,32 @@ public class PeopleFragment extends Fragment {
        // byte[] byteArray = getArgument().getByteArrayExtra("image");
        // Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 
-
-
         return view;
+    }
 
+    //Method on
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.settingButton:
+                //settingsButton_onClick(v);
+                break;
+            case R.id.profileImageButton:
+               // profileButton_onClick(v);
+                break;
+            default:
+                Toast.makeText(getContext(),"Please select something",Toast.LENGTH_LONG);
+        }
+    }
 
+//    public void settingsButton_onClick(View view) {
+//        Intent intent = new Intent(getContext(), SettingsActivity.class);
+//        startActivity(intent);
+//    }
+
+    public void profileButton_onClick(View view){
+        Intent intent = new Intent(getContext(),ProfileSettingsActivity.class);
+        startActivity(intent);
     }
 
 
