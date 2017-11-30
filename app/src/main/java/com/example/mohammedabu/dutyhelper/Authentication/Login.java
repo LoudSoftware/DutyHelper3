@@ -78,8 +78,6 @@ public class Login extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 login();
-                Intent loginIntent = new Intent(Login.this, MainActivity.class);
-                Login.this.startActivity(loginIntent);
             }
         });
     }
@@ -119,22 +117,6 @@ public class Login extends AppCompatActivity{
 
     public void login(){
         Log.d(TAG, "Login Page");
-        /**
-        final ProgressDialog progressDialog = new ProgressDialog(Login.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Please wait while we log you in...");
-        progressDialog.show();
-
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
-         **/
-
         String Email = userEmail.getText().toString().trim() ;
         String Password= userPassword.getText().toString().trim() ;
 

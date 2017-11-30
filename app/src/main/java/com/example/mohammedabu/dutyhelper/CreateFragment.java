@@ -1,11 +1,13 @@
 package com.example.mohammedabu.dutyhelper;
 
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ public class CreateFragment extends Fragment {
     ImageButton datePicker;
     Button cancel;
     Button create;
+
     ImageButton timePicker;
     TextView taskDate;
     TextView taskTime;
@@ -49,11 +52,15 @@ public class CreateFragment extends Fragment {
     String userID;
     FirebaseAuth firebaseAuth;
 
+    //creating objects to create a notification to the user.
+    NotificationCompat.Builder notification;
+    private static final int uniqueID = 45612;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        userID= new UserHelper(firebaseAuth.getInstance()).getUID();
+        userID= new UserHelper(FirebaseAuth.getInstance()).getUID();
 
         View view = inflater.inflate(R.layout.activity_create, container, false);
         //Creating the Spinner with the user's name into the application.
@@ -63,6 +70,8 @@ public class CreateFragment extends Fragment {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
 
+
+        create = (Button)view.findViewById(R.id.buttonCreate);
 
         db=FirebaseDatabase.getInstance().getReference("events");
 
@@ -92,6 +101,10 @@ public class CreateFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addProduct();
+
+                notification = new NotificationCompat.Builder(getContext());
+                notification.setAutoCancel(true);
+                createNotification();
             }
         });
 
@@ -99,8 +112,8 @@ public class CreateFragment extends Fragment {
        timePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment timeDialog = new TimeFragment();
-                timeDialog.show(getFragmentManager(), "TimePicker");
+                //DialogFragment timeDialog = new TimeFragment();
+                //timeDialog.show(getFragmentManager(), "TimePicker");
             }
         });
 
@@ -129,8 +142,8 @@ public class CreateFragment extends Fragment {
 
         if (!(TextUtils.isEmpty(name)&&TextUtils.isEmpty(date))){
             String id=db.push().getKey();
-            CalendarTask event=new CalendarTask(name, date, time, description, 0, "user");// edit to add points and assignee
-            db.child(userID+id).setValue(event);
+            //CalendarTask event=new CalendarTask(name, date, time, description, 0, "user");// edit to add points and assignee
+            //db.child(userID+id).setValue(event);
             task.setText("");
             taskTime.setText("");
             taskDescription.setText("");
@@ -140,9 +153,25 @@ public class CreateFragment extends Fragment {
         else{
             Toast.makeText(getActivity(), "Please enter event details", Toast.LENGTH_LONG).show();
         }
+    }
 
+    public void createNotification(){
+        //specifying the notification's attributes
+        notification.setSmallIcon(R.drawable.logo5);
+        notification.setTicker("This is the ticker");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("Task Created");
 
+//        //Specifying the intent when the notification is clicked. Will take the user to the tasks page.
+//        Intent intent = new Intent(getContext(),TasksFragment.class);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+//        notification.setContentIntent(pendingIntent);
 
+        //Building the notification and issue it.
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            notificationManager.notify(uniqueID, notification.build());
+        }
     }
 
 }
