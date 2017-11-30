@@ -69,7 +69,9 @@ public class CalenderFragment extends Fragment {
 
         //Building the notification and issue it.
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
-        notificationManager.notify(uniqueID, notification.build());
+        if (notificationManager != null) {
+            notificationManager.notify(uniqueID, notification.build());
+        }
     }
 
 }

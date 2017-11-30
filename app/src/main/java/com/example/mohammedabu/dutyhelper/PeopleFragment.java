@@ -40,8 +40,8 @@ public class PeopleFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_people2, container, false);
-        settingsButton.setOnClickListener(this);
         profileImage = (ImageButton)view.findViewById(R.id.profileImageButton);
+        profileImage.setOnClickListener(this);
 
         settingsButton = (ImageButton) view.findViewById(R.id.settingButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +104,10 @@ public class PeopleFragment extends Fragment implements View.OnClickListener {
                 //settingsButton_onClick(v);
                 break;
             case R.id.profileImageButton:
-               // profileButton_onClick(v);
+                profileButton_onClick(v);
                 break;
             default:
-                Toast.makeText(getContext(),"Please select something",Toast.LENGTH_LONG);
+                Toast.makeText(getContext(),"Please select something",Toast.LENGTH_LONG).show();
         }
     }
 
