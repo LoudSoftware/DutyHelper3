@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/Task_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/Due_Date_Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DueDate/time"
+        tools:layout_editor_absoluteX="281dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/Single_TaskDescription"
+        android:layout_width="172dp"
+        android:layout_height="46dp"
+        android:text="Description"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/Single_Task_Assignee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assignee"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="49dp" />
+</android.support.constraint.ConstraintLayout>
