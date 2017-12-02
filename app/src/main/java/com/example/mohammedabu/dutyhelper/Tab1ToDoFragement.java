@@ -3,6 +3,7 @@ package com.example.mohammedabu.dutyhelper;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,28 +26,26 @@ public class Tab1ToDoFragement extends Fragment {
     private DatabaseReference reference;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab1_todo,container,false);
+        View view = inflater.inflate(R.layout.tab1_todo, container, false);
 
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("events");
 
 
-
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.TODO_ListView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-//        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
 
-        FirebaseRecyclerAdapter<TaskModel,TaskHolder> recycleAdapter = new FirebaseRecyclerAdapter<TaskModel, TaskHolder>(
+        FirebaseRecyclerAdapter<TaskModel, TaskHolder> recycleAdapter = new FirebaseRecyclerAdapter<TaskModel, TaskHolder>(
                 TaskModel.class,
                 R.layout.single_task_list,
                 TaskHolder.class,
                 reference
-                ) {
+        ) {
             @Override
             protected void populateViewHolder(TaskHolder viewHolder, TaskModel model, int position) {
                 viewHolder.setTitle(model.getTitle());
