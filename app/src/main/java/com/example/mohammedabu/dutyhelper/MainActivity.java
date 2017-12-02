@@ -42,8 +42,10 @@ public class MainActivity extends ActionBarActivity {
                     CreateFragment createFragment = new CreateFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,createFragment).commit();
                 } else if(menuItemId == R.id.bottom_bar_icon_tasks){
-                    TasksFragment tasksFragment = new TasksFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,tasksFragment).commit();
+                    Tab1ToDoFragement TODOFragment = new Tab1ToDoFragement();
+//                    TasksFragment tasksFragment = new TasksFragment();
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,tasksFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,TODOFragment).commit();
                 } else if(menuItemId == R.id.bottom_bar_icon_profile){
                     PeopleFragment peopleFragment = new PeopleFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,peopleFragment).commit();
