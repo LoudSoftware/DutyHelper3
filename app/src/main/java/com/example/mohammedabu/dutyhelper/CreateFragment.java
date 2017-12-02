@@ -143,7 +143,7 @@ public class CreateFragment extends Fragment {
 
         if (!(TextUtils.isEmpty(name)&&TextUtils.isEmpty(date))){
             String id=db.push().getKey();
-            CalendarTask event=new CalendarTask(name, date, time, description, 0, "user");// edit to add points and assignee
+            CalendarTask event=new CalendarTask(name, date, time, description, 0, "user");// TODO edit to add points and assignee
             db.child(userID+id).setValue(event);
             task.setText("");
             taskTime.setText("");
