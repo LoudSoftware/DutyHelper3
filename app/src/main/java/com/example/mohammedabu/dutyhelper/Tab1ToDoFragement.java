@@ -3,18 +3,14 @@ package com.example.mohammedabu.dutyhelper;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.example.mohammedabu.dutyhelper.dbHelpers.DBHelper;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskHolder;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,10 +44,10 @@ public class Tab1ToDoFragement extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(TaskHolder viewHolder, TaskModel model, int position) {
-                viewHolder.setTitle(model.getTitle());
-                viewHolder.setDescription(model.getDescription());
+                viewHolder.setTitle(model.getEventName());
+                viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setAssignee(model.getAssignee());
-                viewHolder.setDateTime(model.getDueDate() + " " + model.getTime());
+                viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
             }
         };
 

@@ -1,11 +1,11 @@
 package com.example.mohammedabu.dutyhelper;
 
 /**
- * Created by Fiona on 2017-11-27.
+ * Deprecated Task Model representation. Use the TaskModel class instead
  */
 
-//maybe this should've gone somewhere else..?
 
+@Deprecated
 public class CalendarTask {
         private String taskID;
         private String eventName;
