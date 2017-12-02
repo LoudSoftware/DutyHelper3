@@ -7,13 +7,13 @@ public class TaskModel {
     private String assignee;
     private String dueDate;
     private String time;
-    private String points;
+    private Long points;
     private String uid;
     private String status;
 
     public TaskModel() {}  // Needed for Firebase
 
-    public TaskModel(String title, String description, String assignee, String dueDate, String time, String points, String status, String uid) {
+    public TaskModel(String title, String description, String assignee, String dueDate, String time, Long points, String status, String uid) {
         this.title = title;
         this.description = description;
         this.assignee = assignee;
@@ -46,7 +46,7 @@ public class TaskModel {
         return time;
     }
 
-    public String getPoints() {
+    public Long getPoints() {
         return points;
     }
 
@@ -58,7 +58,7 @@ public class TaskModel {
         this.time = time;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(Long points) {
         this.points = points;
     }
 

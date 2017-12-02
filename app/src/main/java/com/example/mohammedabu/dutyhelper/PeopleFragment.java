@@ -1,19 +1,17 @@
 package com.example.mohammedabu.dutyhelper;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.mohammedabu.dutyhelper.dbHelpers.UserHelper;
+import android.widget.Toast;
+
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -25,11 +23,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_CANCELED;
+
 /**
  * Created by Mohammed on 25/09/2017.
  */
 
-public class PeopleFragment extends Fragment implements View.OnClickListener {
+public class PeopleFragment extends Fragment {
 
     ImageButton settingsButton;
     PieChart pieChart;
@@ -40,27 +40,30 @@ public class PeopleFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_people2, container, false);
-        profileImage = (ImageButton)view.findViewById(R.id.profileImageButton);
-        profileImage.setOnClickListener(this);
 
+        profileImage = (ImageButton) view.findViewById(R.id.profileImageButton);
+        profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent settingsClick = new Intent(getActivity(), ProfileSettingsActivity.class);
+                startActivityForResult(settingsClick, 0);
+            }
+        });
         settingsButton = (ImageButton) view.findViewById(R.id.settingButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent settingsClick = new Intent(getActivity(), ProfileSettingsActivity.class);
-                getActivity().startActivity(settingsClick);
+                startActivityForResult(settingsClick, 0);
             }
         });
-       
 
         fullName = (TextView) view.findViewById(R.id.userProfileFullName);
         mAuth = FirebaseAuth.getInstance();
 
-
-      
         /**
          * The code below, until line 75 is to create the Pie chart seen in activity_people2.xml
-        **/
+         **/
         pieChart = (PieChart) view.findViewById(R.id.profileStats);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
@@ -90,34 +93,11 @@ public class PeopleFragment extends Fragment implements View.OnClickListener {
 
         pieChart.setData(data);
 
-       // byte[] byteArray = getArgument().getByteArrayExtra("image");
-       // Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-
         return view;
     }
 
-    //Method on
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.settingButton:
-                //settingsButton_onClick(v);
-                break;
-            case R.id.profileImageButton:
-                profileButton_onClick(v);
-                break;
-            default:
-                Toast.makeText(getContext(),"Please select something",Toast.LENGTH_LONG).show();
-        }
-    }
-
-//    public void settingsButton_onClick(View view) {
-//        Intent intent = new Intent(getContext(), SettingsActivity.class);
-//        startActivity(intent);
-//    }
-
-    public void profileButton_onClick(View view){
-        Intent intent = new Intent(getContext(),ProfileSettingsActivity.class);
+    public void profileButton_onClick(View view) {
+        Intent intent = new Intent(getContext(), ProfileSettingsActivity.class);
         startActivity(intent);
     }
 
@@ -132,6 +112,7 @@ public class PeopleFragment extends Fragment implements View.OnClickListener {
 
     /**
      * Updates the view according to the authentication status.
+     *
      * @param user the current FirebaseUser
      */
     private void updateUI(FirebaseUser user) {
@@ -140,7 +121,41 @@ public class PeopleFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_CANCELED) return;
+        //Getting the Avatar Image we show to our users
+        ImageView avatarImage =
+                (ImageView) getView().findViewById(R.id.profileImageButton);
+        //Figuring out the correct image
+        String drawableName = "profile1";
+        switch (data.getIntExtra("imageID", R.id.teamid00)) {
+            case R.id.teamid00:
+                drawableName = "profile1";
+                break;
+            case R.id.teamid01:
+                drawableName = "profile2";
+                break;
+            case R.id.teamid02:
+                drawableName = "profile3";
+                break;
+            case R.id.teamid03:
+                drawableName = "profile4";
+                break;
+            case R.id.teamid04:
+                drawableName = "profile5";
+                break;
+            case R.id.teamid05:
+                drawableName = "profile6";
+                break;
+            default:
+                drawableName = "profile1";
+                break;
+        }
+        int resID = getResources().getIdentifier(drawableName, "drawable",
+                getActivity().getPackageName());
+        avatarImage.setImageResource(resID);
+    }
 }
 
 

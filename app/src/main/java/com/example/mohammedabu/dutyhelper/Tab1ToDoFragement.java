@@ -23,8 +23,7 @@ public class Tab1ToDoFragement extends Fragment {
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    private ListView mListView;
-    private DBHelper dbHelper;
+
 
 
     @Nullable
@@ -36,12 +35,11 @@ public class Tab1ToDoFragement extends Fragment {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("events");
 
-        dbHelper = new DBHelper(reference);
 
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.TODO_ListView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setHasFixedSize(false);
+//        recyclerView.setHasFixedSize(true);
 
         FirebaseRecyclerAdapter<TaskModel,TaskHolder> recycleAdapter = new FirebaseRecyclerAdapter<TaskModel, TaskHolder>(
                 TaskModel.class,

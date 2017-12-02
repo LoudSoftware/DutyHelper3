@@ -1,83 +1,65 @@
 package com.example.mohammedabu.dutyhelper;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-
 public class ProfileSettingsActivity extends AppCompatActivity {
-    //ImageButton targetImage;
-    Button loadButton;
+
+    ImageView profileImage1;
+    ImageView profileImage2;
+    ImageView profileImage3;
+    ImageView profileImage4;
+    ImageView profileImage5;
+    ImageView profileImage6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
-//        loadButton = (Button)findViewById(R.id.buttonLoad);
-//        //profileImage = (ImageButton) view.findViewById(R.id.imageButton4);
-//        loadButton.setOnClickListener(new Button.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View arg0) {
-//                // TODO Auto-generated method stub
-//                Intent intent = new Intent(Intent.ACTION_PICK,
-//                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent, 0);
-//            }});
-
-
-
+        profileImage1 = (ImageView) findViewById(R.id.teamid00);
+        profileImage2 = (ImageView) findViewById(R.id.teamid01);
+        profileImage3 = (ImageView) findViewById(R.id.teamid02);
+        profileImage4 = (ImageView) findViewById(R.id.teamid03);
+        profileImage5 = (ImageView) findViewById(R.id.teamid04);
+        profileImage6 = (ImageView) findViewById(R.id.teamid05);
 
         // Makes the arrow image act as a back button.
         ImageView backButton = (ImageView)findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
+        View.OnClickListener clickListener =  new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setProfilePicture(view);
+            }
+        };
+
+        profileImage1.setOnClickListener(clickListener);
+        profileImage2.setOnClickListener(clickListener);
+        profileImage3.setOnClickListener(clickListener);
+        profileImage4.setOnClickListener(clickListener);
+        profileImage5.setOnClickListener(clickListener);
+        profileImage6.setOnClickListener(clickListener);
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        // TODO Auto-generated method stub
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (resultCode == RESULT_OK){
-//            Uri targetUri = data.getData();
-//            Bitmap bitmap;
-//            try {
-//                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-//                //targetImage.setImageBitmap(bitmap);
-//
-//
-//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//                byte[] byteArray = stream.toByteArray();
-//
-//                Bundle b = new Bundle();
-//                b.putByteArray("image",byteArray);
-//
-//
-//                // your fragment code
-//                fragment.setArguments(b);
-//
-//            } catch (FileNotFoundException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    public void setProfilePicture(View view) {
+        //Creating a Return intent to pass to the Main Activity
+        Intent returnIntent = new Intent();
+        //Figuring out which image was clicked
+        ImageView selectedImage = (ImageView) view;
+        //Adding stuff to the return intent
+        returnIntent.putExtra("imageID", selectedImage.getId());
+        setResult(RESULT_OK, returnIntent);
+        //Finishing Activity and return to main screen!
+        finish();
+    }
 }
