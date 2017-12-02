@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.mohammedabu.dutyhelper.Authentication.Login;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
 
@@ -14,6 +17,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     ImageView profileImage4;
     ImageView profileImage5;
     ImageView profileImage6;
+    Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         profileImage4 = (ImageView) findViewById(R.id.teamid03);
         profileImage5 = (ImageView) findViewById(R.id.teamid04);
         profileImage6 = (ImageView) findViewById(R.id.teamid05);
+        logout = (Button)findViewById(R.id.buttonLogout);
 
         // Makes the arrow image act as a back button.
         ImageView backButton = (ImageView)findViewById(R.id.backButton);
@@ -36,6 +41,17 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             }
         });
 
+        // Makes the logout button, log the user out of the application and back to login page.
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loggingUserOut = new Intent(ProfileSettingsActivity.this, Login.class);
+                startActivity(loggingUserOut);
+                finish();
+            }
+        });
+
+        //adds the functionality of pressing on the images in the layout
         View.OnClickListener clickListener =  new View.OnClickListener() {
             @Override
             public void onClick(View view) {
