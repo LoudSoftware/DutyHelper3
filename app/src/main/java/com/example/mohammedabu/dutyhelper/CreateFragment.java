@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
 import com.example.mohammedabu.dutyhelper.dbHelpers.UserHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -143,7 +144,7 @@ public class CreateFragment extends Fragment {
 
         if (!(TextUtils.isEmpty(name)&&TextUtils.isEmpty(date))){
             String id=db.push().getKey();
-            CalendarTask event=new CalendarTask(name, date, time, description, 0, "user");// TODO edit to add points and assignee
+            TaskModel event = new TaskModel(name, date, time, description, 0, "assignee");// TODO edit to add points and assignee
             db.child(userID+id).setValue(event);
             task.setText("");
             taskTime.setText("");

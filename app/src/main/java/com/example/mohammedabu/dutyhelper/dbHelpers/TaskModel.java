@@ -1,80 +1,69 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
+/**
+ * Created by Fiona on 2017-11-27.
+ */
+
+//maybe this should've gone somewhere else..?
+
 public class TaskModel {
-
-    private String title;
-    private String description;
+    private String taskID;
+    private String eventName;
+    private String eventDate;
+    private String eventTime;
+    private String eventDescription;
     private String assignee;
-    private String dueDate;
-    private String time;
-    private Long points;
-    private String uid;
-    private String status;
+    private int eventPoints;
 
-    public TaskModel() {}  // Needed for Firebase
+    public TaskModel() {
 
-    public TaskModel(String title, String description, String assignee, String dueDate, String time, Long points, String status, String uid) {
-        this.title = title;
-        this.description = description;
-        this.assignee = assignee;
-        this.dueDate = dueDate;
-        this.time = time;
-        this.points = points;
-        this.status = status;
-        this.uid = uid;
+    } // For Firebase
+
+    public TaskModel(String eventName, String eventDate, String eventTime, String eventDescription, int eventPoints, String assignee) {
+        this.eventName=eventName;
+        this.eventDate=eventDate;
+        this.eventTime=eventTime;
+        this.eventDescription=eventDescription;
+        this.eventPoints=eventPoints;
+        this.assignee=assignee;
     }
 
-    public String getTitle() {
-        return title;
+
+    public void setId(String taskID) {
+        this.taskID = taskID;
     }
-
-    public String getDescription() {
-        return description;
+    public String getId() {
+        return taskID;
     }
-
-    public String getDueDate() {
-        return dueDate;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
-
-    public String getUid() {
-        return uid;
+    public String getEventName() {
+        return eventName;
     }
-
-    public String getAssignee() {return assignee;}
-
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+    public String getEventDate() {
+        return eventDate;
+    }
+    public void setEventDescription(String eventDescription) { this.eventDescription = eventDescription; }
+    public String getEventDescription() {
+        return eventDescription;
+    }
+    public void setPoints(int eventPoints) {
+        this.eventPoints=eventPoints;
+    }
+    public double getPoints() {
+        return eventPoints;
+    }
+    public void setAssignee(String assignee) { this.assignee = assignee; }
+    public String getAssignee() {
+        return assignee;
+    }
+    public void setTime(String eventTime) { this.eventTime = eventTime; }
     public String getTime() {
-        return time;
+        return eventTime;
     }
 
-    public Long getPoints() {
-        return points;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public void setPoints(Long points) {
-        this.points = points;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 }
