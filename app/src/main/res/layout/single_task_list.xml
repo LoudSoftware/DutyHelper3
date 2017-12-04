@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="82dp"
-    xmlns:card_view="http://schemas.android.com/tools">
+    xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <!--TODO Fix the layout in the cards-->
     <android.support.v7.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
@@ -12,7 +13,9 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         card_view:cardCornerRaduis="4dp"
-        card_view:elevation="14dp">
+        card_view:elevation="14dp"
+        app:cardMaxElevation="10dp"
+        android:padding="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"

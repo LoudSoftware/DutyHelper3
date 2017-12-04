@@ -3,6 +3,7 @@ package com.example.mohammedabu.dutyhelper;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -21,6 +23,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -41,6 +44,7 @@ public class PeopleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_people2, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
         profileImage = (ImageButton) view.findViewById(R.id.profileImageButton);
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +63,7 @@ public class PeopleFragment extends Fragment {
         });
 
         fullName = (TextView) view.findViewById(R.id.userProfileFullName);
-        mAuth = FirebaseAuth.getInstance();
+
 
         /**
          * The code below, until line 75 is to create the Pie chart seen in activity_people2.xml
@@ -117,6 +121,14 @@ public class PeopleFragment extends Fragment {
      */
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+/*            profileImage.setImageURI(null);
+
+            Glide
+                    .with(getContext())
+                    .load(user.getPhotoUrl()) // the uri you got from Firebase
+                    .centerCrop()
+                    .into(profileImage);
+            profileImage.setImageURI(user.getPhotoUrl());*/
             fullName.setText(user.getDisplayName());
         }
     }
@@ -155,6 +167,7 @@ public class PeopleFragment extends Fragment {
         int resID = getResources().getIdentifier(drawableName, "drawable",
                 getActivity().getPackageName());
         avatarImage.setImageResource(resID);
+//        Glide.with(this).load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImage); TODO fix this
     }
 }
 
