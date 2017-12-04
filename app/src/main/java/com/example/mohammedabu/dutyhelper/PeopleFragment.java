@@ -2,6 +2,7 @@ package com.example.mohammedabu.dutyhelper;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,14 @@ import static android.app.Activity.RESULT_CANCELED;
  */
 
 public class PeopleFragment extends Fragment {
+
+
+    private static final String IMAGE0 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile1.png";
+    private static final String IMAGE1 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile2.png";
+    private static final String IMAGE2 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile3.png";
+    private static final String IMAGE3 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile4.png";
+    private static final String IMAGE4 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile5.png";
+    private static final String IMAGE5 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile6.png";
 
     ImageButton settingsButton;
     PieChart pieChart;
@@ -121,6 +130,7 @@ public class PeopleFragment extends Fragment {
      */
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+            //TODO create a method to hack the photo from the profile in here
 /*            profileImage.setImageURI(null);
 
             Glide
@@ -152,13 +162,13 @@ public class PeopleFragment extends Fragment {
                 drawableName = "profile3";
                 break;
             case R.id.teamid03:
-                drawableName = "profile4";
+                drawableName = "profile6";
                 break;
             case R.id.teamid04:
-                drawableName = "profile5";
+                drawableName = "profile4";
                 break;
             case R.id.teamid05:
-                drawableName = "profile6";
+                drawableName = "profile5";
                 break;
             default:
                 drawableName = "profile1";
@@ -167,7 +177,7 @@ public class PeopleFragment extends Fragment {
         int resID = getResources().getIdentifier(drawableName, "drawable",
                 getActivity().getPackageName());
         avatarImage.setImageResource(resID);
-//        Glide.with(this).load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImage); TODO fix this
+//        Glide.with(this.getView().getContext()).load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImage); //TODO fix this
     }
 }
 

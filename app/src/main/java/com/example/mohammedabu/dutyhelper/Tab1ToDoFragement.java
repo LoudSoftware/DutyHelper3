@@ -8,18 +8,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskHolder;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Tab1ToDoFragement extends Fragment {
     private static final String TAG = "Tab1ToDoFragement";
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private ImageView radioButton;
 
 
     @Nullable
@@ -32,9 +37,10 @@ public class Tab1ToDoFragement extends Fragment {
         reference = database.getReference("events");
 
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.TODO_ListView);
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.TODO_ListView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
+
 
         FirebaseRecyclerAdapter<TaskModel, TaskHolder> recycleAdapter = new FirebaseRecyclerAdapter<TaskModel, TaskHolder>(
                 TaskModel.class,
@@ -43,11 +49,21 @@ public class Tab1ToDoFragement extends Fragment {
                 reference
         ) {
             @Override
-            protected void populateViewHolder(TaskHolder viewHolder, TaskModel model, int position) {
+            protected void populateViewHolder(final TaskHolder viewHolder, final TaskModel model, int position) {
                 viewHolder.setTitle(model.getEventName());
                 viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setAssignee(model.getAssignee());
                 viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
+                viewHolder.setStatus(model.getCompleted());
+
+                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        model.setCompleted(!model.getCompleted());
+                        notifyDataSetChanged();
+                        viewHolder.setStatus(model.getCompleted());
+                    }
+                });
             }
         };
 
