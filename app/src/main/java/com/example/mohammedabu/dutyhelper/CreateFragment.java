@@ -7,8 +7,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
 import com.example.mohammedabu.dutyhelper.dbHelpers.UserHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +46,8 @@ public class CreateFragment extends Fragment {
     Button cancel;
     Button create;
 
+    private final String TAG = "CreateFragment";
+
     ImageButton timePicker;
     TextView taskDate;
     TextView taskTime;
@@ -50,8 +55,9 @@ public class CreateFragment extends Fragment {
     EditText taskDescription;
     DatabaseReference db;
     String userID;
-    FirebaseAuth firebaseAuth;
+    private Spinner mySpinner;
 
+    FirebaseAuth firebaseAuth;
     //creating objects to create a notification to the user.
     NotificationCompat.Builder notification;
     private static final int uniqueID = 45612;
@@ -64,7 +70,7 @@ public class CreateFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_create, container, false);
         //Creating the Spinner with the user's name into the application.
-        Spinner mySpinner = (Spinner)view.findViewById(R.id.create_UserSelection);
+        mySpinner = (Spinner)view.findViewById(R.id.create_UserSelection);
         //The Strings that will use the users names from the array string in the strings.xml file in resources.
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,10 +145,13 @@ public class CreateFragment extends Fragment {
         String name=task.getText().toString().trim();
         String description=taskDescription.getText().toString().trim();
         String time= taskTime.getText().toString().trim();
+        String assignee = mySpinner.toString();
+        Log.d(TAG, "The spinner is: " + assignee);
+
 
         if (!(TextUtils.isEmpty(name)&&TextUtils.isEmpty(date))){
             String id=db.push().getKey();
-            CalendarTask event=new CalendarTask(name, date, time, description, 0, "user");// edit to add points and assignee
+            TaskModel event = new TaskModel(name, date, time, description, 0, "assignee");// TODO edit to add points and assignee
             db.child(userID+id).setValue(event);
             task.setText("");
             taskTime.setText("");
