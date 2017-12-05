@@ -10,6 +10,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.mohammedabu.dutyhelper.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class TaskHolder extends RecyclerView.ViewHolder {
 
@@ -19,6 +21,7 @@ public class TaskHolder extends RecyclerView.ViewHolder {
     private final TextView dateTime;
     private final ImageView hamburgerMenuButton;
     private final ImageView radioButton;
+    private PopupMenu popUp;
 
 
     public TaskHolder(View itemView) {
@@ -30,23 +33,9 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         dateTime = (TextView) itemView.findViewById(R.id.Due_Date_Time);
 
         hamburgerMenuButton = (ImageButton) itemView.findViewById(R.id.hamburger_card);
-        hamburgerMenuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(hamburgerMenuButton, getAdapterPosition());
-            }
-        });
 
         radioButton = (ImageView) itemView.findViewById(R.id.iv_image);
-    }
 
-    private void showPopupMenu(View view, int position) {
-        // inflate menu
-        PopupMenu popup = new PopupMenu(view.getContext(), view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.popup_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(position));
-        popup.show();
     }
 
     public void setTitle(String title) {
@@ -77,5 +66,13 @@ public class TaskHolder extends RecyclerView.ViewHolder {
 
     public ImageView getRadioButton() {
         return radioButton;
+    }
+
+    public ImageView getHamburgerButton() {
+        return hamburgerMenuButton;
+    }
+
+    public PopupMenu getPopUp() {
+        return popUp;
     }
 }

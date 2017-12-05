@@ -154,13 +154,11 @@ public class CreateFragment extends Fragment {
         String name=task.getText().toString().trim();
         String description=taskDescription.getText().toString().trim();
         String time= taskTime.getText().toString().trim();
-        String assignee = mySpinner.toString();
-        Log.d(TAG, "The spinner is: " + assignee);
 
 
         if (!(TextUtils.isEmpty(name)&&TextUtils.isEmpty(date))){
             String id=db.push().getKey();
-            TaskModel event = new TaskModel(name, date, time, description, 0, "assignee");// TODO edit to add points and assignee
+            TaskModel event = new TaskModel(name, date, time, description, 0, "assignee", userID+id);// TODO edit to add points and assignee
             db.child(userID+id).setValue(event);
             task.setText("");
             taskTime.setText("");

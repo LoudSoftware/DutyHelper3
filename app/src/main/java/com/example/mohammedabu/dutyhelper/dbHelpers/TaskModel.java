@@ -6,8 +6,8 @@ package com.example.mohammedabu.dutyhelper.dbHelpers;
 
 //maybe this should've gone somewhere else..?
 
-public class TaskModel {
-    private String taskID;
+public class TaskModel{
+    private String uid;
     private String eventName;
     private String eventDate;
     private String eventTime;
@@ -20,7 +20,7 @@ public class TaskModel {
 
     } // For Firebase
 
-    public TaskModel(String eventName, String eventDate, String eventTime, String eventDescription, int eventPoints, String assignee) {
+    public TaskModel(String eventName, String eventDate, String eventTime, String eventDescription, int eventPoints, String assignee, String uid) {
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventTime = eventTime;
@@ -28,6 +28,7 @@ public class TaskModel {
         this.eventPoints = eventPoints;
         this.assignee = assignee;
         this.completed = false;
+        this.uid = uid;
     }
 
 
@@ -36,11 +37,11 @@ public class TaskModel {
     }
 
     public void setId(String taskID) {
-        this.taskID = taskID;
+        this.uid = taskID;
     }
 
-    public String getId() {
-        return taskID;
+    public String getUid() {
+        return uid;
     }
 
     public void setEventName(String eventName) {
