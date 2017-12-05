@@ -14,8 +14,8 @@
         android:title="Create"/>
     <item
         android:id="@+id/bottom_bar_icon_search"
-        android:icon="@drawable/ic_search"
-        android:title="Search"/>
+        android:icon="@drawable/ic_rewards"
+        android:title="Rewards"/>
     <item
         android:id="@+id/bottom_bar_icon_profile"
         android:icon="@drawable/ic_profile"

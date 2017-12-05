@@ -59,18 +59,18 @@ public class Tab1ToDoFragement extends Fragment {
                 viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setAssignee(model.getAssignee());
                 viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
-                viewHolder.setStatus(model.getCompleted());
-
-                //Sets the
-                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        model.setCompleted(!model.getCompleted());
-                        notifyDataSetChanged();
-                        FirebaseDatabase.getInstance().getReference().child("events/"+model.getUid()+"/completed").setValue(!model.getCompleted());
-                        viewHolder.setStatus(model.getCompleted());
-                    }
-                }); //TODO make this update server side
+//                viewHolder.setStatus(model.getCompleted());
+//
+//                //Sets the
+//                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        model.setCompleted(!model.getCompleted());
+//                        notifyDataSetChanged();
+//                        FirebaseDatabase.getInstance().getReference().child("events/"+model.getUid()+"/completed").setValue(!model.getCompleted());
+//                        viewHolder.setStatus(model.getCompleted());
+//                    }
+//                }); //TODO make this update server side
 
                 viewHolder.getHamburgerButton().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -81,7 +81,6 @@ public class Tab1ToDoFragement extends Fragment {
 
             }
         };
-
 
         recyclerView.setAdapter(recycleAdapter);
         recycleAdapter.notifyDataSetChanged();
