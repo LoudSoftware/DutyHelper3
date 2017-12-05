@@ -56,6 +56,7 @@ public class CreateFragment extends Fragment {
     DatabaseReference db;
     String userID;
     private Spinner mySpinner;
+    private Spinner pointsSpinner;
 
     FirebaseAuth firebaseAuth;
     //creating objects to create a notification to the user.
@@ -75,6 +76,14 @@ public class CreateFragment extends Fragment {
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
+
+
+        //Creating the Spinner with the user's name into the application.
+        pointsSpinner = (Spinner)view.findViewById(R.id.create_pointsAllocated);
+        //The Strings that will use the users names from the array string in the strings.xml file in resources.
+        ArrayAdapter<String> myAdapterPoint = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.points));
+        myAdapterPoint.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pointsSpinner.setAdapter(myAdapterPoint);
 
 
         create = (Button)view.findViewById(R.id.buttonCreate);
