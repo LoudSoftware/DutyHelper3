@@ -1,29 +1,34 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
-import android.provider.SyncStateContract;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
-import android.widget.Toast;
-
-import com.example.mohammedabu.dutyhelper.MainActivity;
 import com.example.mohammedabu.dutyhelper.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+public class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
-    private int position;
-    public MyMenuItemClickListener(int positon) {
-        this.position=positon;
+    private String uid;
+
+    public MyMenuItemClickListener(String id) {
+        this.uid = id;
+    }
+
+    private void deleteTask(String id) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("events").child(id);
+        dR.removeValue();
     }
 
     @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
 
             case R.id.Modify:
-                //TODO Add code to modify
+                //TODO get code from fiona
                 return true;
             case R.id.Delete:
-               //TODO make some code to delete
+                deleteTask(uid);
+                //TODO make some code to delete
                 return true;
             default:
         }
