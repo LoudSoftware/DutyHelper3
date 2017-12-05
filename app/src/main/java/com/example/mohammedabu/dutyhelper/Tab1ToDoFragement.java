@@ -54,16 +54,17 @@ public class Tab1ToDoFragement extends Fragment {
                 viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setAssignee(model.getAssignee());
                 viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
-                viewHolder.setStatus(model.getCompleted());
 
-                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        model.setCompleted(!model.getCompleted());
-                        notifyDataSetChanged();
-                        viewHolder.setStatus(model.getCompleted());
-                    }
-                });
+                //viewHolder.setStatus(model.getCompleted());
+
+//                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        model.setCompleted(!model.getCompleted());
+//                        notifyDataSetChanged();
+//                        viewHolder.setStatus(model.getCompleted());
+//                    }
+//                });
             }
         };
 
