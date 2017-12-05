@@ -31,7 +31,7 @@ public class CalendarTaskHolder extends RecyclerView.ViewHolder {
 
     }
 
-    private void showPopupMenu(View view, int position) {
+    private void showPopupMenu(View view, String position) {
         // inflate menu
         PopupMenu popup = new PopupMenu(view.getContext(), view);
         MenuInflater inflater = popup.getMenuInflater();
