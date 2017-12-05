@@ -1,47 +1,34 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
 /**
- * Created by Fiona on 2017-11-27.
+ * Created by XavOli-Idea on 12/5/2017.
  */
 
-//maybe this should've gone somewhere else..?
-
-public class TaskModel{
-    private String uid;
+public class CalendarTaskModel {
+    private String taskID;
     private String eventName;
     private String eventDate;
     private String eventTime;
     private String eventDescription;
-    private String assignee;
-    private int eventPoints;
-    private boolean completed;
 
-    public TaskModel() {
+    public CalendarTaskModel() {
 
     } // For Firebase
 
-    public TaskModel(String eventName, String eventDate, String eventTime, String eventDescription, int eventPoints, String assignee, String uid) {
+    public CalendarTaskModel(String eventName, String eventDate, String eventTime, String eventDescription) {
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.eventTime = eventTime;
         this.eventDescription = eventDescription;
-        this.eventPoints = eventPoints;
-        this.assignee = assignee;
-        this.completed = false;
-        this.uid = uid;
     }
 
-
-    public void setCompleted(boolean status) {
-        this.completed = status;
-    }
 
     public void setId(String taskID) {
-        this.uid = taskID;
+        this.taskID = taskID;
     }
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return taskID;
     }
 
     public void setEventName(String eventName) {
@@ -68,32 +55,12 @@ public class TaskModel{
         return eventDescription;
     }
 
-    public void setPoints(int eventPoints) {
-        this.eventPoints = eventPoints;
-    }
-
-    public double getPoints() {
-        return eventPoints;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-    }
-
-    public String getAssignee() {
-        return assignee;
-    }
-
     public void setTime(String eventTime) {
         this.eventTime = eventTime;
     }
 
     public String getTime() {
         return eventTime;
-    }
-
-    public boolean getCompleted() {
-        return completed;
     }
 
 }

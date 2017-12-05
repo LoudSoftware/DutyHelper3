@@ -1,21 +1,17 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.example.mohammedabu.dutyhelper.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class TaskHolder extends RecyclerView.ViewHolder {
 
@@ -24,7 +20,9 @@ public class TaskHolder extends RecyclerView.ViewHolder {
     private final TextView assignee;
     private final TextView dateTime;
     private final ImageView hamburgerMenuButton;
-    private final ToggleButton completedToggle;
+    private final ImageView radioButton;
+    private PopupMenu popUp;
+
 
     public TaskHolder(View itemView) {
         super(itemView);
@@ -33,40 +31,25 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         description = (TextView) itemView.findViewById(R.id.Single_TaskDescription);
         assignee = (TextView) itemView.findViewById(R.id.Single_Task_Assignee);
         dateTime = (TextView) itemView.findViewById(R.id.Due_Date_Time);
-        completedToggle = (ToggleButton)itemView.findViewById(R.id.chkState);
 
         hamburgerMenuButton = (ImageButton) itemView.findViewById(R.id.hamburger_card);
-        hamburgerMenuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupMenu(hamburgerMenuButton, getAdapterPosition());
-            }
-        });
 
-        completedToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               //checking if the toggle is on the ON state
-                if (isChecked){
-                    //confirmTaskCompletedDialogue();
-                    showDialog("Are you sure you want to set the task to completed?!");
-                }
-            }
-        });
+        radioButton = (ImageView) itemView.findViewById(R.id.iv_image);
 
-    }
-
-    private void showPopupMenu(View view, int position) {
-        // inflate menu
-        PopupMenu popup = new PopupMenu(view.getContext(), view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.popup_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(position));
-        popup.show();
     }
 
     public void setTitle(String title) {
         this.title.setText(title);
+    }
+
+    public void setStatus(boolean completed) {
+        int resID;
+        if (completed) {
+            resID = R.drawable.abc_btn_radio_to_on_mtrl_015;
+        } else {
+            resID = R.drawable.abc_btn_radio_to_on_mtrl_000;
+        }
+        radioButton.setImageResource(resID);
     }
 
     public void setDescription(String description) {
@@ -81,22 +64,15 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         this.dateTime.setText(dateTime);
     }
 
+    public ImageView getRadioButton() {
+        return radioButton;
+    }
 
+    public ImageView getHamburgerButton() {
+        return hamburgerMenuButton;
+    }
 
-    public void showDialog(String message) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-        builder.setMessage(message).setPositiveButton("Yes, I'm sure!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                completedToggle.setChecked(true);
-                //TODO: Remove the task entirely from the list and mark it as done and award the points.
-            }
-        }).setNegativeButton("Nope, I've changed my mind", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                completedToggle.setChecked(false);
-            }
-        }).show();
+    public PopupMenu getPopUp() {
+        return popUp;
     }
 }

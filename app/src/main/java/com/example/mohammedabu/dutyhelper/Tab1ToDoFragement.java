@@ -6,10 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.example.mohammedabu.dutyhelper.dbHelpers.MyMenuItemClickListener;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskHolder;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -54,23 +59,42 @@ public class Tab1ToDoFragement extends Fragment {
                 viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setAssignee(model.getAssignee());
                 viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
+                viewHolder.setStatus(model.getCompleted());
 
-                //viewHolder.setStatus(model.getCompleted());
+                //Sets the
+                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        model.setCompleted(!model.getCompleted());
+                        notifyDataSetChanged();
+                        FirebaseDatabase.getInstance().getReference().child("events/"+model.getUid()+"/completed").setValue(!model.getCompleted());
+                        viewHolder.setStatus(model.getCompleted());
+                    }
+                }); //TODO make this update server side
 
-//                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        model.setCompleted(!model.getCompleted());
-//                        notifyDataSetChanged();
-//                        viewHolder.setStatus(model.getCompleted());
-//                    }
-//                });
+                viewHolder.getHamburgerButton().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopupMenu(viewHolder.getHamburgerButton(), model);
+                    }
+                });
+
             }
         };
+
 
         recyclerView.setAdapter(recycleAdapter);
         recycleAdapter.notifyDataSetChanged();
 
         return view;
+    }
+
+    private void showPopupMenu(View view, TaskModel model) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(view.getContext(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.popup_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener(model.getUid()));
+        popup.show();
     }
 }
