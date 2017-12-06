@@ -1,8 +1,8 @@
 package com.example.mohammedabu.dutyhelper;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,17 +17,11 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.Toast;
-
-import com.example.mohammedabu.dutyhelper.dbHelpers.MyMenuItemClickListener;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskHolder;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Tab1ToDoFragement extends Fragment {
     private static final String TAG = "Tab1ToDoFragement";
@@ -142,5 +136,60 @@ public class Tab1ToDoFragement extends Fragment {
                         viewHolder.getCompletedToggle().setChecked(false);
                     }
                 }).show();
+    }
+
+    public class MyMenuItemClickListener extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+
+
+
+        private String uid;
+
+        public MyMenuItemClickListener() {
+        }
+
+        public MyMenuItemClickListener(String id) {
+            this.uid = id;
+        }
+
+
+
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+
+                case R.id.Modify:
+                    modifyTask(uid);
+                    //TODO get code from fiona
+                    return true;
+                case R.id.Delete:
+                    deleteTask(uid);
+                    //TODO make some code to delete
+                    return true;
+                default:
+            }
+            return false;
+        }
+    }
+
+    private void deleteTask(String id) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("events").child(id);
+        dR.removeValue();
+    }
+
+
+
+    public void modifyTask(String uid) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("events").child(uid);
+        Intent myIntent = new Intent(this.getContext(), UpdateActivity.class);
+        myIntent.putExtra("uid", uid);
+        this.startActivity(myIntent);
+
+        //CalendarEvent event=new CalendarEvent(name, date, time, description, 0, "user");
+
+
+        // TaskModel event = new TaskModel(null, null, null, null, null, null);
+
+
     }
 }

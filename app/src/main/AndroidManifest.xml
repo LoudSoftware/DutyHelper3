@@ -24,6 +24,7 @@
         <activity android:name=".Authentication.Login" />
         <activity android:name=".Authentication.RegisterActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".Tab1ToDoFragement$MyMenuItemClickListener"/>
         <activity
             android:name=".ProfileSettingsActivity"
             android:label="@string/title_activity_profile_settings" />
