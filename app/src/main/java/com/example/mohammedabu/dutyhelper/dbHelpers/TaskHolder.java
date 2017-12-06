@@ -26,6 +26,7 @@ public class TaskHolder extends RecyclerView.ViewHolder {
     private final ImageView hamburgerMenuButton;
 
     private final ToggleButton completedToggle;
+    private final TextView points;
 
     private PopupMenu popUp;
 
@@ -40,6 +41,8 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         completedToggle = (ToggleButton)itemView.findViewById(R.id.chkState);
 
         hamburgerMenuButton = (ImageButton) itemView.findViewById(R.id.hamburger_card);
+
+        points = (TextView) itemView.findViewById(R.id.Task_Points);
 
 //        radioButton = (ImageView) itemView.findViewById(R.id.iv_image);
 
@@ -71,6 +74,12 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         this.dateTime.setText(dateTime);
     }
 
+    public void setPoints(int points) {
+        String text = String.valueOf(points) + " Points";
+        this.points.setText(text);
+    }
+
+    @Deprecated
     public ImageView getRadioButton() {
 //        return radioButton;
         return null;

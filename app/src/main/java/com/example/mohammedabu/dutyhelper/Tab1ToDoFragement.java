@@ -1,10 +1,12 @@
 package com.example.mohammedabu.dutyhelper;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ public class Tab1ToDoFragement extends Fragment {
     private ImageView radioButton;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class Tab1ToDoFragement extends Fragment {
 
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.TODO_ListView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(false);
 
 
@@ -63,7 +66,7 @@ public class Tab1ToDoFragement extends Fragment {
                 viewHolder.setAssignee(model.getAssignee());
                 viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
                 viewHolder.setStatus(model.getCompleted());
-
+                viewHolder.setPoints(model.getPoints());
                 viewHolder.getCompletedToggle().setChecked(model.getCompleted());
 
                 //Adding a listener for the ToggleSwitch
@@ -85,19 +88,6 @@ public class Tab1ToDoFragement extends Fragment {
                     }
                 });
 
-
-                /*//Sets the
-                viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        model.setCompleted(!model.getCompleted());
-
-                        FirebaseDatabase.getInstance().getReference("events")
-                                .child(model.getUid())
-                                .child("completed")
-                                .setValue(!model.getCompleted());
-                    }
-                }); //TODO make this update server side*/
 
                 viewHolder.getHamburgerButton().setOnClickListener(new View.OnClickListener() {
                     @Override

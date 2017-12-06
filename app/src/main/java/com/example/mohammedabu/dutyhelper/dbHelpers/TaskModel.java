@@ -32,6 +32,10 @@ public class TaskModel{
     }
 
 
+    public void setEventPoints(int eventPoints) {
+        this.eventPoints = eventPoints;
+    }
+
     public void setCompleted(boolean status) {
         this.completed = status;
     }
@@ -72,7 +76,7 @@ public class TaskModel{
         this.eventPoints = eventPoints;
     }
 
-    public double getPoints() {
+    public int getPoints() {
         return eventPoints;
     }
 
