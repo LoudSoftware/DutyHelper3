@@ -4,10 +4,12 @@ package com.example.mohammedabu.dutyhelper.dbHelpers;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.mohammedabu.dutyhelper.R;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +22,8 @@ public class TaskHolder extends RecyclerView.ViewHolder {
     private final TextView assignee;
     private final TextView dateTime;
     private final ImageView hamburgerMenuButton;
-    private final ImageView radioButton;
+//    private final ImageView radioButton;
+    private final ToggleButton completedToggle;
     private PopupMenu popUp;
 
 
@@ -31,10 +34,11 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         description = (TextView) itemView.findViewById(R.id.Single_TaskDescription);
         assignee = (TextView) itemView.findViewById(R.id.Single_Task_Assignee);
         dateTime = (TextView) itemView.findViewById(R.id.Due_Date_Time);
+        completedToggle = (ToggleButton)itemView.findViewById(R.id.chkState);
 
         hamburgerMenuButton = (ImageButton) itemView.findViewById(R.id.hamburger_card);
 
-        radioButton = (ImageView) itemView.findViewById(R.id.iv_image);
+//        radioButton = (ImageView) itemView.findViewById(R.id.iv_image);
 
     }
 
@@ -49,7 +53,7 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         } else {
             resID = R.drawable.abc_btn_radio_to_on_mtrl_000;
         }
-        radioButton.setImageResource(resID);
+//        radioButton.setImageResource(resID);
     }
 
     public void setDescription(String description) {
@@ -65,14 +69,15 @@ public class TaskHolder extends RecyclerView.ViewHolder {
     }
 
     public ImageView getRadioButton() {
-        return radioButton;
+//        return radioButton;
+        return null;
     }
 
     public ImageView getHamburgerButton() {
         return hamburgerMenuButton;
     }
 
-    public PopupMenu getPopUp() {
-        return popUp;
+    public ToggleButton getCompletedToggle() {
+        return completedToggle;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.mohammedabu.dutyhelper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -61,7 +64,29 @@ public class Tab1ToDoFragement extends Fragment {
                 viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
                 viewHolder.setStatus(model.getCompleted());
 
-                //Sets the
+                viewHolder.getCompletedToggle().setChecked(model.getCompleted());
+
+                //Adding a listener for the ToggleSwitch
+                viewHolder.getCompletedToggle().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        //checking if the toggle is on the ON state
+                        if (isChecked) {
+                            //confirmTaskCompletedDialogue();
+                            showDialog("Are you sure you want to set the task to completed?!", viewHolder, model);
+                        } else {
+                            //Update the DB
+                            FirebaseDatabase.getInstance().getReference("events")
+                                    .child(model.getUid())
+                                    .child("completed")
+                                    .setValue(false);
+                            viewHolder.getCompletedToggle().setChecked(false);
+                        }
+                    }
+                });
+
+
+                /*//Sets the
                 viewHolder.getRadioButton().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -72,7 +97,7 @@ public class Tab1ToDoFragement extends Fragment {
                                 .child("completed")
                                 .setValue(!model.getCompleted());
                     }
-                }); //TODO make this update server side
+                }); //TODO make this update server side*/
 
                 viewHolder.getHamburgerButton().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -98,5 +123,34 @@ public class Tab1ToDoFragement extends Fragment {
         inflater.inflate(R.menu.popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new MyMenuItemClickListener(model.getUid()));
         popup.show();
+    }
+
+    /**
+     * A method to show the dialog when the toggle is "ON"
+     *
+     * @param message the Dialog's title
+     * @author Mohammed Abu-Zeinah
+     **/
+    public void showDialog(String message, final TaskHolder viewHolder, final TaskModel model) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(message).setPositiveButton("Yes, I'm sure!", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Update the DB
+                FirebaseDatabase.getInstance().getReference("events")
+                        .child(model.getUid())
+                        .child("completed")
+                        .setValue(true);
+//                viewHolder.getCompletedToggle().setChecked(true);
+                //TODO: Remove the task entirely from the list and mark it as done and award the points.
+            }
+        }).setNegativeButton("Nope, I've changed my mind", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        viewHolder.getCompletedToggle().setChecked(false);
+                    }
+                }).show();
     }
 }
