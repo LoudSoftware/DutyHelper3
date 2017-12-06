@@ -2,6 +2,7 @@ package com.example.mohammedabu.dutyhelper;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,15 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import android.graphics.Color;
 import android.widget.TextView;
 
 import com.example.mohammedabu.dutyhelper.dbHelpers.CalendarTaskHolder;
-import com.example.mohammedabu.dutyhelper.dbHelpers.CalendarTaskModel;
+import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,12 +32,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import com.example.mohammedabu.dutyhelper.Authentication.Login;
-import com.example.mohammedabu.dutyhelper.Authentication.RegisterActivity;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 /**
  * Created by Mohammed on 25/09/2017.
@@ -90,14 +86,14 @@ public class CalenderFragment extends Fragment {
             }
         });
 
-        FirebaseRecyclerAdapter<CalendarTaskModel, CalendarTaskHolder> recycleAdapter = new FirebaseRecyclerAdapter<CalendarTaskModel, CalendarTaskHolder>(
-                CalendarTaskModel.class,
+        FirebaseRecyclerAdapter<TaskModel, CalendarTaskHolder> recycleAdapter = new FirebaseRecyclerAdapter<TaskModel, CalendarTaskHolder>(
+                TaskModel.class,
                 R.layout.single_task_list_2,
                 CalendarTaskHolder.class,
                 reference
         ) {
             @Override
-            protected void populateViewHolder(final CalendarTaskHolder viewHolder, final CalendarTaskModel model, int position) {
+            protected void populateViewHolder(final CalendarTaskHolder viewHolder, final TaskModel model, int position) {
                 viewHolder.setTitle(model.getEventName());
                 viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setDateTime(model.getEventDate());
@@ -146,12 +142,6 @@ public class CalenderFragment extends Fragment {
         notification.setWhen(System.currentTimeMillis());
         notification.setContentTitle("Task Created");
 
-//        //Specifying the intent when the notification is clicked. Will take the user to the tasks page.
-//        Intent intent = new Intent(getContext(),TasksFragment.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-//        notification.setContentIntent(pendingIntent);
-
-        //Building the notification and issue it.
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
         if (notificationManager != null) {
             notificationManager.notify(uniqueID, notification.build());

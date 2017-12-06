@@ -3,7 +3,7 @@ package com.example.mohammedabu.dutyhelper.dbHelpers;
 /**
  * Created by XavOli-Idea on 12/5/2017.
  */
-
+@Deprecated
 public class CalendarTaskModel {
     private String taskID;
     private String eventName;
