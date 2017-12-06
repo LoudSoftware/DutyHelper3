@@ -2,10 +2,10 @@ package com.example.mohammedabu.dutyhelper;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskHolder;
 import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -180,10 +181,17 @@ public class Tab1ToDoFragement extends Fragment {
 
 
     public void modifyTask(String uid) {
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("events").child(uid);
-        Intent myIntent = new Intent(this.getContext(), UpdateActivity.class);
-        myIntent.putExtra("uid", uid);
-        this.startActivity(myIntent);
+
+        Fragment updateFragment = new UpdateActivity();
+        Bundle bundle = new Bundle();
+        bundle.putString("uid", uid);
+
+        updateFragment.setArguments(bundle);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().replace(getId(), updateFragment);
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
         //CalendarEvent event=new CalendarEvent(name, date, time, description, 0, "user");
 
