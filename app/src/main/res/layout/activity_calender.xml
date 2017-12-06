@@ -1,58 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
     android:weightSum="1">
 
-
-        <TextView
-            android:id="@+id/month"
-            android:text="hello"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/screen3"
-            android:gravity="center"
-
-        />
+    <TextView
+        android:id="@+id/month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/screen3"
+        android:gravity="center"
+        android:text="hello"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/compactcalendar_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
-        android:layout_below="@+id/month"
         android:id="@+id/compactcalendar_view"
         android:layout_width="fill_parent"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:layout_height="275dp"
-        app:compactCalendarTargetHeight="275dp"
-        app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="@color/screen4"
-        app:compactCalendarTextColor="#fff"
-        app:compactCalendarCurrentSelectedDayBackgroundColor="#c7a500"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:compactCalendarBackgroundColor="#ffffff"
         app:compactCalendarCurrentDayBackgroundColor="@android:color/background_dark"
+        app:compactCalendarCurrentDayTextColor="@color/white"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="@color/screen3"
+        app:compactCalendarCurrentSelectedDayTextColor="@color/white"
         app:compactCalendarMultiEventIndicatorColor="#fff"
-        android:layout_marginBottom="14dp"
-        android:layout_above="@+id/cardView" />
-        />
+        app:compactCalendarTargetHeight="275dp"
+        app:compactCalendarTextColor="#585858"
+        app:compactCalendarTextSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/month"
+        app:layout_constraintVertical_bias="1.0" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="330dp"
-        android:layout_height="250dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="7dp"
         android:foregroundGravity="bottom|center"
-        android:translationZ="10dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="20dp"
-        app:contentPadding="10dp">
+        app:contentPadding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compactcalendar_view">
 
         <RelativeLayout
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/Calendar_list"
@@ -83,4 +93,4 @@
 
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

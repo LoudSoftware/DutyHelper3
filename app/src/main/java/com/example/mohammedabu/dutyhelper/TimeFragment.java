@@ -23,30 +23,40 @@ public class TimeFragment extends DialogFragment implements TimePickerDialog.OnT
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minuteInt) {
-       String am_pm="";
-       int hour;
-       String minute;
-       if (hourOfDay<12){
-           am_pm="AM";
-           hour=hourOfDay;
-           if (hour==0){
-               hour=12;
-           }
-       } else{
-           am_pm="PM";
-           hour=hourOfDay-12;
-           if (hour==0){
-               hour=12;
-           }
-       }
-       if (minuteInt<10){
-           minute="0"+Integer.toString(minuteInt);
-       } else {
-           minute=Integer.toString(minuteInt);
-       }displayTime(hour, minute, am_pm);
+        String am_pm="";
+        int hourInt;
+        String hour;
+        String minute;
+        if (hourOfDay<12){
+            am_pm="AM";
+            hourInt=hourOfDay;
+            if (hourInt==0){
+                hourInt=12;
+            }
+        } else{
+            am_pm="PM";
+            hourInt=hourOfDay-12;
+            if (hourInt==0){
+                hourInt=12;
+            }
+        }
+        if (minuteInt<10){
+            minute="0"+Integer.toString(minuteInt);
+        } else {
+            minute=Integer.toString(minuteInt);
+        }
+
+        if (hourInt<10){
+            hour="0"+Integer.toString(hourInt);
+            System.out.println(hour);
+        }else{
+            hour=Integer.toString(hourInt);
+        }
+
+        displayTime(hour, minute, am_pm);
     }
 
-    public void displayTime(int hour, String minute, String am_pm) {
+    public void displayTime(String hour, String minute, String am_pm) {
         TextView taskTime= (TextView)getActivity(). findViewById(R.id.taskTime);
         taskTime.setText(hour+":"+minute+" "+am_pm);
     }

@@ -1,6 +1,7 @@
 package com.example.mohammedabu.dutyhelper;
 
 import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,15 +24,18 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import com.example.mohammedabu.dutyhelper.Authentication.Login;
 import com.example.mohammedabu.dutyhelper.Authentication.RegisterActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 /**
  * Created by Mohammed on 25/09/2017.
@@ -43,37 +47,41 @@ public class CalenderFragment extends Fragment {
     private Calendar currentCalender = Calendar.getInstance();
     CompactCalendarView calendarView;
 
+    private SimpleDateFormat dateForCalendar = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
+    private SimpleDateFormat pullForCalendar = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("dd-M-yyyy hh:mm:ss a", Locale.getDefault());
     private SimpleDateFormat dateFormatForMonth = new SimpleDateFormat("MMMM - yyyy", Locale.getDefault());
     private Button button;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-
+    private Query query;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_calender, container, false);
-
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("events");
-
         calendarView = (CompactCalendarView) view.findViewById(R.id.compactcalendar_view);
         calendarView.setUseThreeLetterAbbreviation(false);
         calendarView.setFirstDayOfWeek(Calendar.SUNDAY);
+
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.Calendar_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        recyclerView.setHasFixedSize(false);
 
         //set initial title
         final TextView month = (TextView)view.findViewById(R.id.month);
         month.setText(dateFormatForMonth.format(currentCalender.getTime()));
 
-        Event ev1 = new Event(Color.RED, 1512589754000L, "Teachers' Professional Day");
-        calendarView.addEvent(ev1);
-
-
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                System.out.println("Hey");
+                Context context = getActivity().getApplicationContext();
+                Date date = new Date(dateClicked.getTime());
+                pullForCalendar.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+                String formatted = pullForCalendar.format(date);
+                System.out.println(formatted);
             }
 
             @Override
@@ -81,11 +89,6 @@ public class CalenderFragment extends Fragment {
                 month.setText(dateFormatForMonth.format(firstDayOfNewMonth));
             }
         });
-
-        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.Calendar_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        recyclerView.setHasFixedSize(false);
-
 
         FirebaseRecyclerAdapter<CalendarTaskModel, CalendarTaskHolder> recycleAdapter = new FirebaseRecyclerAdapter<CalendarTaskModel, CalendarTaskHolder>(
                 CalendarTaskModel.class,
@@ -97,8 +100,16 @@ public class CalenderFragment extends Fragment {
             protected void populateViewHolder(final CalendarTaskHolder viewHolder, final CalendarTaskModel model, int position) {
                 viewHolder.setTitle(model.getEventName());
                 viewHolder.setDescription(model.getEventDescription());
-                viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
-                System.out.println(model.getEventDate());
+                viewHolder.setDateTime(model.getEventDate());
+                String thisDate = model.getEventDate()+ " " + model.getTime();
+                try {
+                    Date date = dateForCalendar.parse(thisDate);
+                    long epoch = date.getTime();
+                    Event ev1 = new Event(Color.RED, epoch, model.getEventName());
+                    calendarView.addEvent(ev1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         };
 
@@ -126,13 +137,6 @@ public class CalenderFragment extends Fragment {
         });
         return view;
     }
-
-
-
-
-
-
-
 
 
     public void createNotification(){
