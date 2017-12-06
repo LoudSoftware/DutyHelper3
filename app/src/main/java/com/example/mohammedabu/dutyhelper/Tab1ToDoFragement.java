@@ -66,9 +66,11 @@ public class Tab1ToDoFragement extends Fragment {
                     @Override
                     public void onClick(View v) {
                         model.setCompleted(!model.getCompleted());
-                        notifyDataSetChanged();
-                        FirebaseDatabase.getInstance().getReference().child("events/"+model.getUid()+"/completed").setValue(!model.getCompleted());
-                        viewHolder.setStatus(model.getCompleted());
+
+                        FirebaseDatabase.getInstance().getReference("events")
+                                .child(model.getUid())
+                                .child("completed")
+                                .setValue(!model.getCompleted());
                     }
                 }); //TODO make this update server side
 
