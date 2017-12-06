@@ -1,6 +1,8 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.View;
@@ -22,8 +24,9 @@ public class TaskHolder extends RecyclerView.ViewHolder {
     private final TextView assignee;
     private final TextView dateTime;
     private final ImageView hamburgerMenuButton;
-//    private final ImageView radioButton;
+
     private final ToggleButton completedToggle;
+
     private PopupMenu popUp;
 
 
@@ -36,6 +39,7 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         dateTime = (TextView) itemView.findViewById(R.id.Due_Date_Time);
         completedToggle = (ToggleButton)itemView.findViewById(R.id.chkState);
 
+        completedToggle = (ToggleButton)itemView.findViewById(R.id.chkState);
         hamburgerMenuButton = (ImageButton) itemView.findViewById(R.id.hamburger_card);
 
 //        radioButton = (ImageView) itemView.findViewById(R.id.iv_image);
