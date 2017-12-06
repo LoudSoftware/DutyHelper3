@@ -1,8 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:drawable="@drawable/abc_btn_radio_to_on_mtrl_015"
-        android:color="@color/bb_darkBackgroundColor"
-        android:state_checked="true" />
-    <item android:drawable="@drawable/abc_btn_radio_to_on_mtrl_000"
-        android:color="@color/bb_inActiveBottomBarItemColor"/>
-</selector>
