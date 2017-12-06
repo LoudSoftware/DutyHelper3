@@ -1,5 +1,6 @@
 package com.example.mohammedabu.dutyhelper;
 
+import android.app.Dialog;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 
@@ -10,6 +11,8 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ToggleButton;
 
 import com.example.mohammedabu.dutyhelper.Adapters.ViewPagerAdapter;
 
@@ -19,6 +22,7 @@ import java.util.List;
 public class activity_tasks extends AppCompatActivity {
 
     private static final String TAG = "Task Activity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +61,6 @@ public class activity_tasks extends AppCompatActivity {
 
     private void setupViewPager(ViewPagerAdapter adapter, ViewPager viewPager) {
         adapter.addFragment(new Tab1ToDoFragement(), "To do");
-        adapter.addFragment(new Tab2OverdoFragement(), "Overdo");
-        adapter.addFragment(new Tab3CompletedFragment(), "Completed");
         viewPager.setAdapter(adapter);
     }
 
