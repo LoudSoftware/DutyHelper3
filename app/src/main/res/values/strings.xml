@@ -90,4 +90,6 @@
     <string name="userFullName">John Doe</string>
     <string name="descriptionHint">Add task notes</string>
     <string name="taskHintName">Enter the task name</string>
+    <string name="update" />
+    <string name="updateButton">update</string>
 </resources>
