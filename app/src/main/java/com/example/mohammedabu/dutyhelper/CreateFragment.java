@@ -43,7 +43,7 @@ public class CreateFragment extends Fragment {
     EditText taskDescription;
     DatabaseReference db;
     String userID;
-    FirebaseAuth firebaseAuth;
+
     //creating objects to create a notification to the user.
     NotificationCompat.Builder notification;
     private Spinner assigneeSpinner;
@@ -164,11 +164,6 @@ public class CreateFragment extends Fragment {
         notification.setTicker("This is the ticker");
         notification.setWhen(System.currentTimeMillis());
         notification.setContentTitle("Task Created");
-
-//        //Specifying the intent when the notification is clicked. Will take the user to the tasks page.
-//        Intent intent = new Intent(getContext(),TasksFragment.class);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-//        notification.setContentIntent(pendingIntent);
 
         //Building the notification and issue it.
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);

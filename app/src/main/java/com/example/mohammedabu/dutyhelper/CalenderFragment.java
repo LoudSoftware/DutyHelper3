@@ -72,7 +72,6 @@ public class CalenderFragment extends Fragment {
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                Context context = getActivity().getApplicationContext();
                 Date date = new Date(dateClicked.getTime());
                 pullForCalendar.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
                 String formatted = pullForCalendar.format(date);

@@ -59,7 +59,6 @@ public class Tab1ToDoFragement extends Fragment {
                 viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setAssignee(model.getAssignee());
                 viewHolder.setDateTime(model.getEventDate() + " " + model.getTime());
-                viewHolder.setStatus(model.getCompleted());
                 viewHolder.setPoints(model.getPoints());
                 viewHolder.getCompletedToggle().setChecked(model.getCompleted());
 
@@ -69,7 +68,6 @@ public class Tab1ToDoFragement extends Fragment {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         //checking if the toggle is on the ON state
                         if (isChecked) {
-                            //confirmTaskCompletedDialogue();
                             showDialog("Are you sure you want to set the task to completed?!", viewHolder, model);
                         } else {
                             //Update the DB
@@ -81,7 +79,6 @@ public class Tab1ToDoFragement extends Fragment {
                         }
                     }
                 });
-
 
                 viewHolder.getHamburgerButton().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -126,8 +123,6 @@ public class Tab1ToDoFragement extends Fragment {
                         .child(model.getUid())
                         .child("completed")
                         .setValue(true);
-//                viewHolder.getCompletedToggle().setChecked(true);
-                //TODO: Remove the task entirely from the list and mark it as done and award the points.
             }
         }).setNegativeButton("Nope, I've changed my mind", new DialogInterface.OnClickListener() {
 
@@ -145,7 +140,7 @@ public class Tab1ToDoFragement extends Fragment {
 
     public void modifyTask(String uid) {
 
-        Fragment updateFragment = new UpdateActivity();
+        Fragment updateFragment = new UpdateFragment();
         Bundle bundle = new Bundle();
         bundle.putString("uid", uid);
 
@@ -153,15 +148,8 @@ public class Tab1ToDoFragement extends Fragment {
 
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().replace(getId(), updateFragment);
-//        fragmentTransaction.addToBackStack(null);
+
         fragmentTransaction.commit();
-
-        //CalendarEvent event=new CalendarEvent(name, date, time, description, 0, "user");
-
-
-        // TaskModel event = new TaskModel(null, null, null, null, null, null);
-
-
     }
 
     public class MyMenuItemClickListener extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -183,11 +171,9 @@ public class Tab1ToDoFragement extends Fragment {
 
                 case R.id.Modify:
                     modifyTask(uid);
-                    //TODO get code from fiona
                     return true;
                 case R.id.Delete:
                     deleteTask(uid);
-                    //TODO make some code to delete
                     return true;
                 default:
             }

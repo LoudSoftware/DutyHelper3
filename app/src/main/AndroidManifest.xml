@@ -32,7 +32,7 @@
             android:name=".activity_tasks"
             android:label="@string/title_activity_tasks2"
             android:theme="@style/AppTheme" />
-        <activity android:name=".UpdateActivity"/>
+        <activity android:name=".UpdateFragment"/>
     </application>
 
 </manifest>

@@ -35,10 +35,10 @@ import com.google.firebase.database.ValueEventListener;
  * Created by Erivwo on 05/12/2017.
  */
 
-public class UpdateActivity extends Fragment {
+public class UpdateFragment extends Fragment {
 
     private static final int uniqueID = 45612;
-    private final String TAG = "UpdateActivity";
+    private final String TAG = "UpdateFragment";
     ImageButton datePicker;
     Button cancel;
     ImageButton timePicker;
@@ -75,7 +75,7 @@ public class UpdateActivity extends Fragment {
         //Creating the Spinner with the user's name into the application.
         assigneeSpinner = (Spinner) view.findViewById(R.id.create_UserSelection);
         //The Strings that will use the users names from the array string in the strings.xml file in resources.
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
+        final ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         assigneeSpinner.setAdapter(myAdapter);
 
@@ -103,12 +103,14 @@ public class UpdateActivity extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 model = dataSnapshot.getValue(TaskModel.class);
-                task.setText(model.getEventName());
-                taskDescription.setText(model.getEventDescription());
-                taskTime.setText(model.getTime());
-                taskDate.setText(model.getEventDate());
-                pointsSpinner.setSelection(model.getPoints() - 1);
-                System.out.println(model);
+                if (model != null) {
+                    task.setText(model.getEventName());
+                    taskDescription.setText(model.getEventDescription());
+                    taskTime.setText(model.getTime());
+                    taskDate.setText(model.getEventDate());
+                    pointsSpinner.setSelection(model.getPoints() - 1);
+                    System.out.println(model);
+                }
             }
 
             @Override
