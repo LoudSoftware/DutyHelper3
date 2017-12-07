@@ -32,7 +32,7 @@ public class TaskHolder extends RecyclerView.ViewHolder {
         description = (TextView) itemView.findViewById(R.id.Single_TaskDescription);
         assignee = (TextView) itemView.findViewById(R.id.Single_Task_Assignee);
         dateTime = (TextView) itemView.findViewById(R.id.Due_Date_Time);
-        completedToggle = (ToggleButton)itemView.findViewById(R.id.chkState);
+        completedToggle = (ToggleButton) itemView.findViewById(R.id.chkState);
 
         hamburgerMenuButton = (ImageButton) itemView.findViewById(R.id.hamburger_card);
 

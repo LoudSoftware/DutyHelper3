@@ -38,11 +38,10 @@ import java.util.TimeZone;
  */
 
 public class CalenderFragment extends Fragment {
-    NotificationCompat.Builder notification;
     private static final int uniqueID = 45612;
-    private Calendar currentCalender = Calendar.getInstance();
+    NotificationCompat.Builder notification;
     CompactCalendarView calendarView;
-
+    private Calendar currentCalender = Calendar.getInstance();
     private SimpleDateFormat dateForCalendar = new SimpleDateFormat("dd/MM/yyyy hh:mm a");
     private SimpleDateFormat pullForCalendar = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat dateFormatForDisplaying = new SimpleDateFormat("dd-M-yyyy hh:mm:ss a", Locale.getDefault());
@@ -67,7 +66,7 @@ public class CalenderFragment extends Fragment {
         recyclerView.setHasFixedSize(false);
 
         //set initial title
-        final TextView month = (TextView)view.findViewById(R.id.month);
+        final TextView month = (TextView) view.findViewById(R.id.month);
         month.setText(dateFormatForMonth.format(currentCalender.getTime()));
 
         calendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
@@ -97,7 +96,7 @@ public class CalenderFragment extends Fragment {
                 viewHolder.setTitle(model.getEventName());
                 viewHolder.setDescription(model.getEventDescription());
                 viewHolder.setDateTime(model.getEventDate());
-                String thisDate = model.getEventDate()+ " " + model.getTime();
+                String thisDate = model.getEventDate() + " " + model.getTime();
                 try {
                     Date date = dateForCalendar.parse(thisDate);
                     long epoch = date.getTime();
@@ -113,10 +112,7 @@ public class CalenderFragment extends Fragment {
         recycleAdapter.notifyDataSetChanged();
 
 
-
-
-
-        button = (Button)view.findViewById(R.id.button);
+        button = (Button) view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +131,7 @@ public class CalenderFragment extends Fragment {
     }
 
 
-    public void createNotification(){
+    public void createNotification() {
         //specifying the notification's attributes
         notification.setSmallIcon(R.drawable.logo5);
         notification.setTicker("This is the ticker");

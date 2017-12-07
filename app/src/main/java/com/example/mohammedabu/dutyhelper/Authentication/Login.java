@@ -27,12 +27,12 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  * This is the Login class, it holds the code that handles the userr login logic
  */
-public class Login extends AppCompatActivity{
+public class Login extends AppCompatActivity {
 
     private static final String TAG = "LoginScreen";
     private EditText userEmail;
     private EditText userPassword;
-    private  Button tvLogin;
+    private Button tvLogin;
     private TextView registerLink;
     private FirebaseUser firebaseUser;
     private FirebaseAuth mAuth;
@@ -69,10 +69,10 @@ public class Login extends AppCompatActivity{
         // Build a GoogleSignInClient with the options specified by gso.
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        userEmail = (EditText)findViewById(R.id.emailField);
-        userPassword = (EditText)findViewById(R.id.passwordField);
-        tvLogin = (Button)findViewById(R.id.tvLogin);
-        registerLink = (TextView)findViewById(R.id.tv_SignUp);
+        userEmail = (EditText) findViewById(R.id.emailField);
+        userPassword = (EditText) findViewById(R.id.passwordField);
+        tvLogin = (Button) findViewById(R.id.tvLogin);
+        registerLink = (TextView) findViewById(R.id.tv_SignUp);
 
 
         // set listeners to be able to disable the login button if the login fields are empty
@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity{
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
 
-        registerLink.setOnClickListener(new View.OnClickListener(){
+        registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent registerIntent = new Intent(Login.this, RegisterActivity.class);
@@ -93,7 +93,7 @@ public class Login extends AppCompatActivity{
             }
         });
 
-        tvLogin.setOnClickListener(new View.OnClickListener(){
+        tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
@@ -101,13 +101,13 @@ public class Login extends AppCompatActivity{
         });
     }
 
-    void checkFieldsForEmptyValues(){
+    void checkFieldsForEmptyValues() {
         tvLogin = (Button) findViewById(R.id.tvLogin);
 
         String s1 = userEmail.getText().toString();
         String s2 = userPassword.getText().toString();
 
-        if(s1.equals("")|| s2.equals("")){
+        if (s1.equals("") || s2.equals("")) {
             tvLogin.setEnabled(false);
         } else {
             tvLogin.setEnabled(true);
@@ -115,17 +115,17 @@ public class Login extends AppCompatActivity{
     }
 
 
-    public void login(){
+    public void login() {
         Log.d(TAG, "Login Page");
-        String Email = userEmail.getText().toString().trim() ;
-        String Password= userPassword.getText().toString().trim() ;
+        String Email = userEmail.getText().toString().trim();
+        String Password = userPassword.getText().toString().trim();
 
         mAuth.signInWithEmailAndPassword(Email, Password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //check if successful
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             firebaseUser = mAuth.getCurrentUser();
                             finish();
                             Toast.makeText(Login.this, "Logging in successful", Toast.LENGTH_LONG).show();

@@ -6,8 +6,7 @@ package com.example.mohammedabu.dutyhelper.dbHelpers;
  */
 
 
-
-public class TaskModel{
+public class TaskModel {
     private String uid;
     private String eventName;
     private String eventDate;

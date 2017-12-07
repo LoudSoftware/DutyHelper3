@@ -24,22 +24,23 @@ public class DateFragment extends DialogFragment implements DatePickerDialog.OnD
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        populateSetDate(year, month+1, day);
+        populateSetDate(year, month + 1, day);
     }
+
     public void populateSetDate(int year, int month, int day) {
-        TextView taskDate= (TextView)getActivity(). findViewById(R.id.taskDate);
+        TextView taskDate = (TextView) getActivity().findViewById(R.id.taskDate);
         String monthPadded;
         String dayPadded;
-        if(month<10){
-            monthPadded="0"+Integer.toString(month);
-        }else{
-            monthPadded=Integer.toString(month);
+        if (month < 10) {
+            monthPadded = "0" + Integer.toString(month);
+        } else {
+            monthPadded = Integer.toString(month);
         }
-        if(day<10){
-            dayPadded="0"+Integer.toString(day);
-        }else{
-            dayPadded=Integer.toString(day);
+        if (day < 10) {
+            dayPadded = "0" + Integer.toString(day);
+        } else {
+            dayPadded = Integer.toString(day);
         }
-        taskDate.setText(dayPadded+"/"+monthPadded+"/"+year);
+        taskDate.setText(dayPadded + "/" + monthPadded + "/" + year);
     }
 }

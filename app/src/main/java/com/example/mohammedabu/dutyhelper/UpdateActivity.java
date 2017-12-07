@@ -37,11 +37,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UpdateActivity extends Fragment {
 
+    private static final int uniqueID = 45612;
+    private final String TAG = "UpdateActivity";
     ImageButton datePicker;
     Button cancel;
-
-    private final String TAG = "UpdateActivity";
-
     ImageButton timePicker;
     TextView taskDate;
     TextView taskTime;
@@ -49,14 +48,12 @@ public class UpdateActivity extends Fragment {
     EditText taskDescription;
     DatabaseReference db;
     String userID;
-    private Spinner assigneeSpinner;
-    private Button update;
-
-    private Spinner pointsSpinner;
     FirebaseAuth firebaseAuth;
     //creating objects to create a notification to the user.
     NotificationCompat.Builder notification;
-    private static final int uniqueID = 45612;
+    private Spinner assigneeSpinner;
+    private Button update;
+    private Spinner pointsSpinner;
     private String uid;
     private ImageView backButton;
     private TaskModel model;

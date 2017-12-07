@@ -32,7 +32,6 @@ public class Tab1ToDoFragement extends Fragment {
     private ImageView radioButton;
 
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -132,53 +131,17 @@ public class Tab1ToDoFragement extends Fragment {
             }
         }).setNegativeButton("Nope, I've changed my mind", new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        viewHolder.getCompletedToggle().setChecked(false);
-                    }
-                }).show();
-    }
-
-    public class MyMenuItemClickListener extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
-
-
-
-        private String uid;
-
-        public MyMenuItemClickListener() {
-        }
-
-        public MyMenuItemClickListener(String id) {
-            this.uid = id;
-        }
-
-
-
-
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()) {
-
-                case R.id.Modify:
-                    modifyTask(uid);
-                    //TODO get code from fiona
-                    return true;
-                case R.id.Delete:
-                    deleteTask(uid);
-                    //TODO make some code to delete
-                    return true;
-                default:
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                viewHolder.getCompletedToggle().setChecked(false);
             }
-            return false;
-        }
+        }).show();
     }
 
     private void deleteTask(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("events").child(id);
         dR.removeValue();
     }
-
-
 
     public void modifyTask(String uid) {
 
@@ -199,5 +162,36 @@ public class Tab1ToDoFragement extends Fragment {
         // TaskModel event = new TaskModel(null, null, null, null, null, null);
 
 
+    }
+
+    public class MyMenuItemClickListener extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+
+
+        private String uid;
+
+        public MyMenuItemClickListener() {
+        }
+
+        public MyMenuItemClickListener(String id) {
+            this.uid = id;
+        }
+
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+
+                case R.id.Modify:
+                    modifyTask(uid);
+                    //TODO get code from fiona
+                    return true;
+                case R.id.Delete:
+                    deleteTask(uid);
+                    //TODO make some code to delete
+                    return true;
+                default:
+            }
+            return false;
+        }
     }
 }

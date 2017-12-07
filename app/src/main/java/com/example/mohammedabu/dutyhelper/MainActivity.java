@@ -1,11 +1,9 @@
 package com.example.mohammedabu.dutyhelper;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
-import android.view.View;
 
 import com.example.mohammedabu.dutyhelper.Authentication.Login;
 import com.roughike.bottombar.BottomBar;
@@ -23,33 +21,32 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, Login.class);
 
 
-
         /**
          * The code below is to create the Bottom Navigation Bar, which appears in all the fragments.
          */
 
-        bottomBar = BottomBar.attach(this,savedInstanceState);
+        bottomBar = BottomBar.attach(this, savedInstanceState);
         bottomBar.setItemsFromMenu(R.menu.menu_bottombar, new OnMenuTabClickListener() {
             @Override
             public void onMenuTabSelected(@IdRes int menuItemId) {
-                if (menuItemId == R.id.bottom_bar_icon_calender){
+                if (menuItemId == R.id.bottom_bar_icon_calender) {
                     CalenderFragment calenderFragment = new CalenderFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,calenderFragment).commit();
-                } else if (menuItemId == R.id.bottom_bar_icon_search){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, calenderFragment).commit();
+                } else if (menuItemId == R.id.bottom_bar_icon_search) {
                     RewardFragment rewardFragment = new RewardFragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame, rewardFragment).commit();
-                } else if(menuItemId == R.id.bottom_bar_icon_create){
+                } else if (menuItemId == R.id.bottom_bar_icon_create) {
                     CreateFragment createFragment = new CreateFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,createFragment).commit();
-                } else if(menuItemId == R.id.bottom_bar_icon_tasks){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, createFragment).commit();
+                } else if (menuItemId == R.id.bottom_bar_icon_tasks) {
                     Tab1ToDoFragement TODOFragment = new Tab1ToDoFragement();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,TODOFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, TODOFragment).commit();
                     // TODO actually use the tabs and shit like that
 //                    TasksFragment tasksFragment = new TasksFragment();
 //                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,tasksFragment).commit();
-                } else if(menuItemId == R.id.bottom_bar_icon_profile){
+                } else if (menuItemId == R.id.bottom_bar_icon_profile) {
                     PeopleFragment peopleFragment = new PeopleFragment();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame,peopleFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, peopleFragment).commit();
                 }
             }
 

@@ -31,12 +31,11 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 
 public class CreateFragment extends Fragment {
+    private static final int uniqueID = 45612;
+    private final String TAG = "CreateFragment";
     ImageButton datePicker;
     Button cancel;
     Button create;
-
-    private final String TAG = "CreateFragment";
-
     ImageButton timePicker;
     TextView taskDate;
     TextView taskTime;
@@ -44,23 +43,21 @@ public class CreateFragment extends Fragment {
     EditText taskDescription;
     DatabaseReference db;
     String userID;
-    private Spinner assigneeSpinner;
-    private Spinner pointsSpinner;
-
     FirebaseAuth firebaseAuth;
     //creating objects to create a notification to the user.
     NotificationCompat.Builder notification;
-    private static final int uniqueID = 45612;
+    private Spinner assigneeSpinner;
+    private Spinner pointsSpinner;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        userID= new UserHelper(FirebaseAuth.getInstance()).getUID();
+        userID = new UserHelper(FirebaseAuth.getInstance()).getUID();
 
         View view = inflater.inflate(R.layout.activity_create, container, false);
         //Creating the Spinner with the user's name into the application.
-        assigneeSpinner = (Spinner)view.findViewById(R.id.create_UserSelection);
+        assigneeSpinner = (Spinner) view.findViewById(R.id.create_UserSelection);
         //The Strings that will use the users names from the array string in the strings.xml file in resources.
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,25 +65,25 @@ public class CreateFragment extends Fragment {
 
 
         //Creating the Spinner with the user's name into the application.
-        pointsSpinner = (Spinner)view.findViewById(R.id.create_pointsAllocated);
+        pointsSpinner = (Spinner) view.findViewById(R.id.create_pointsAllocated);
         //The Strings that will use the users names from the array string in the strings.xml file in resources.
         ArrayAdapter<String> myAdapterPoint = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.points));
         myAdapterPoint.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pointsSpinner.setAdapter(myAdapterPoint);
 
 
-        create = (Button)view.findViewById(R.id.buttonCreate);
+        create = (Button) view.findViewById(R.id.buttonCreate);
 
-        db=FirebaseDatabase.getInstance().getReference("events");
+        db = FirebaseDatabase.getInstance().getReference("events");
 
-        taskDate = (TextView)view.findViewById(R.id.taskDate) ;
+        taskDate = (TextView) view.findViewById(R.id.taskDate);
         taskTime = (TextView) view.findViewById(R.id.taskTime);
 
-        task= (EditText) view.findViewById(R.id.task);
+        task = (EditText) view.findViewById(R.id.task);
 
         taskDescription = (EditText) view.findViewById(R.id.taskDescription);
 
-        cancel = (Button)view.findViewById(R.id.buttonCancel);
+        cancel = (Button) view.findViewById(R.id.buttonCancel);
         //navigating from this fragment page to the calendar page once the cancel button is clicked
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +96,7 @@ public class CreateFragment extends Fragment {
             }
         });
 
-        create= (Button)view.findViewById(R.id.buttonCreate);
+        create = (Button) view.findViewById(R.id.buttonCreate);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,8 +109,8 @@ public class CreateFragment extends Fragment {
             }
         });
 
-       timePicker = (ImageButton)view.findViewById(R.id.imageButtonTimePicker);
-       timePicker.setOnClickListener(new View.OnClickListener() {
+        timePicker = (ImageButton) view.findViewById(R.id.imageButtonTimePicker);
+        timePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment timeDialog = new TimeFragment();
@@ -122,7 +119,7 @@ public class CreateFragment extends Fragment {
         });
 
 
-        datePicker = (ImageButton)view.findViewById(R.id.imageButtonDatePicker);
+        datePicker = (ImageButton) view.findViewById(R.id.imageButtonDatePicker);
         //popping the datePicker dialogue when select date is pressed.
         datePicker.setOnClickListener(new View.OnClickListener() {
 
@@ -138,31 +135,30 @@ public class CreateFragment extends Fragment {
         return view;
     }
 
-    private void addProduct(){
-        String date=taskDate.getText().toString().trim();
-        String name=task.getText().toString().trim();
-        String description=taskDescription.getText().toString().trim();
-        String time= taskTime.getText().toString().trim();
+    private void addProduct() {
+        String date = taskDate.getText().toString().trim();
+        String name = task.getText().toString().trim();
+        String description = taskDescription.getText().toString().trim();
+        String time = taskTime.getText().toString().trim();
         int points = Integer.parseInt(pointsSpinner.getSelectedItem().toString());
         String assignee = assigneeSpinner.getSelectedItem().toString();
 
 
-        if (!(TextUtils.isEmpty(name)&&TextUtils.isEmpty(date))){
-            String id=db.push().getKey();
-            TaskModel event = new TaskModel(name, date, time, description, points, assignee, userID+id);// TODO edit to add points and assignee
-            db.child(userID+id).setValue(event);
+        if (!(TextUtils.isEmpty(name) && TextUtils.isEmpty(date))) {
+            String id = db.push().getKey();
+            TaskModel event = new TaskModel(name, date, time, description, points, assignee, userID + id);// TODO edit to add points and assignee
+            db.child(userID + id).setValue(event);
             task.setText("");
             taskTime.setText("");
             taskDescription.setText("");
             taskDescription.setText("");
             Toast.makeText(getActivity(), "Event added", Toast.LENGTH_LONG).show();
-        }
-        else{
+        } else {
             Toast.makeText(getActivity(), "Please enter event details", Toast.LENGTH_LONG).show();
         }
     }
 
-    public void createNotification(){
+    public void createNotification() {
         //specifying the notification's attributes
         notification.setSmallIcon(R.drawable.logo5);
         notification.setTicker("This is the ticker");

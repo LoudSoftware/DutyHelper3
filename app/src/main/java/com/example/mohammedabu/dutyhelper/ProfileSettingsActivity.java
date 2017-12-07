@@ -1,12 +1,8 @@
 package com.example.mohammedabu.dutyhelper;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -52,10 +48,10 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         profileImage4 = (ImageView) findViewById(R.id.teamid03);
         profileImage5 = (ImageView) findViewById(R.id.teamid04);
         profileImage6 = (ImageView) findViewById(R.id.teamid05);
-        logout = (Button)findViewById(R.id.buttonLogout);
+        logout = (Button) findViewById(R.id.buttonLogout);
 
         // Makes the arrow image act as a back button.
-        ImageView backButton = (ImageView)findViewById(R.id.backButton);
+        ImageView backButton = (ImageView) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,7 +70,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         });
 
         //adds the functionality of pressing on the images in the layout
-        View.OnClickListener clickListener =  new View.OnClickListener() {
+        View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setProfilePicture(view);
@@ -94,7 +90,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         Intent returnIntent = new Intent();
         //Figuring out which image was clicked
         ImageView selectedImage = (ImageView) view;
-        
+
         setImageUri(selectedImage);
         //Adding stuff to the return intent
         returnIntent.putExtra("imageID", selectedImage.getId());
@@ -105,6 +101,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
     /**
      * Sets the Firebase user image Uri
+     *
      * @param image
      */
     private void setImageUri(ImageView image) {

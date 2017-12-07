@@ -1,23 +1,12 @@
 package com.example.mohammedabu.dutyhelper;
 
-import android.app.Dialog;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ToggleButton;
 
 import com.example.mohammedabu.dutyhelper.Adapters.ViewPagerAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class activity_tasks extends AppCompatActivity {
 
@@ -36,7 +25,7 @@ public class activity_tasks extends AppCompatActivity {
         final ViewPager pager = (ViewPager) findViewById(R.id.container);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        setupViewPager(adapter,pager);
+        setupViewPager(adapter, pager);
         tabs.setupWithViewPager(pager);
 
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(

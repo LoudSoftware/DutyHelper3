@@ -86,11 +86,11 @@ public class Intro extends AppCompatActivity {
 
     }
 
-    public  void btnSkipClick(View v) {
+    public void btnSkipClick(View v) {
         launchHomeScreen();
     }
 
-    public  void btnNextClick(View v) {
+    public void btnNextClick(View v) {
         // checking for last page
         // if last page home screen will be launched
         int current = getItem(1);
