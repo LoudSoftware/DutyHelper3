@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import com.example.mohammedabu.dutyhelper.R;
 
+/**
+ * This is the Intro Class, it holds the code to handle the introduction tutorial
+ */
 public class Intro extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -26,52 +29,6 @@ public class Intro extends AppCompatActivity {
     private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.activity_intro);
-
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnSkip = (Button) findViewById(R.id.btn_skip);
-        btnNext = (Button) findViewById(R.id.btn_next);
-
-        layouts = new int[]{
-                R.layout.activity_screen_1,
-                R.layout.activity_screen_2,
-                R.layout.activity_screen_3};
-
-        // adding bottom dots
-        addBottomDots(0);
-
-        viewPagerAdapter = new ViewPagerAdapter();
-        viewPager.setAdapter(viewPagerAdapter);
-        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-    }
-
-    public  void btnSkipClick(View v)
-    {
-        launchHomeScreen();
-    }
-
-    public  void btnNextClick(View v)
-    {
-        // checking for last page
-        // if last page home screen will be launched
-        int current = getItem(1);
-        if (current < layouts.length) {
-            // move to next screen
-            viewPager.setCurrentItem(current);
-        } else {
-            launchHomeScreen();
-        }
-    }
-
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -100,6 +57,75 @@ public class Intro extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.activity_intro);
+
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+        btnSkip = (Button) findViewById(R.id.btn_skip);
+        btnNext = (Button) findViewById(R.id.btn_next);
+
+        layouts = new int[]{
+                R.layout.activity_screen_1,
+                R.layout.activity_screen_2,
+                R.layout.activity_screen_3};
+
+        // adding bottom dots
+        addBottomDots(0);
+
+        viewPagerAdapter = new ViewPagerAdapter();
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+
+    }
+
+    public void btnSkipClick(View v) {
+        launchHomeScreen();
+    }
+
+    public void btnNextClick(View v) {
+        // checking for last page
+        // if last page home screen will be launched
+        int current = getItem(1);
+        if (current < layouts.length) {
+            // move to next screen
+            viewPager.setCurrentItem(current);
+        } else {
+            launchHomeScreen();
+        }
+    }
+
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[layouts.length];
+
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(getResources().getColor(R.color.dot_light));
+            dotsLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(getResources().getColor(R.color.dot_dark));
+    }
+
+    private int getItem(int i) {
+        return viewPager.getCurrentItem() + i;
+    }
+
+    private void launchHomeScreen() {
+        startActivity(new Intent(this, Login.class));
+        finish();
+    }
 
     public class ViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
@@ -135,33 +161,6 @@ public class Intro extends AppCompatActivity {
             View view = (View) object;
             container.removeView(view);
         }
-    }
-
-    private void addBottomDots(int currentPage) {
-        dots = new TextView[layouts.length];
-
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.dot_light));
-            dotsLayout.addView(dots[i]);
-        }
-
-        if (dots.length > 0)
-            dots[currentPage].setTextColor(getResources().getColor(R.color.dot_dark));
-    }
-
-
-
-    private int getItem(int i) {
-        return viewPager.getCurrentItem() + i;
-    }
-
-    private void launchHomeScreen() {
-        startActivity(new Intent(this, Login.class));
-        finish();
     }
 
 }

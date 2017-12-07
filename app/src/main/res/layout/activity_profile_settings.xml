@@ -17,7 +17,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Select a new Avatar"
+        android:text="@string/promptAvatarSel"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,20 +25,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonLoad"
-        android:layout_width="368dp"
+        android:id="@+id/buttonLogout"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Load from your phone"
+        android:text="@string/logoutButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintVertical_bias="0.958" />
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -54,7 +54,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.45">
 
         <ImageView
             android:id="@+id/teamid00"
@@ -74,7 +74,7 @@
             android:layout_columnSpan="1"
             android:layout_row="0"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile2" />
 
         <ImageView
             android:id="@+id/teamid02"
@@ -84,7 +84,7 @@
             android:layout_columnSpan="1"
             android:layout_row="0"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile3" />
 
         <ImageView
             android:id="@+id/teamid03"
@@ -94,7 +94,7 @@
             android:layout_columnSpan="1"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile6" />
 
         <ImageView
             android:id="@+id/teamid04"
@@ -104,7 +104,7 @@
             android:layout_columnSpan="1"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile4" />
 
         <ImageView
             android:id="@+id/teamid05"
@@ -114,7 +114,7 @@
             android:layout_columnSpan="1"
             android:layout_row="1"
             android:layout_rowSpan="1"
-            app:srcCompat="@drawable/profile1" />
+            app:srcCompat="@drawable/profile5" />
 
     </GridLayout>
 
@@ -131,6 +131,6 @@
         app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.089999974" />
 
 </android.support.constraint.ConstraintLayout>

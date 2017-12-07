@@ -1,53 +1,89 @@
 package com.example.mohammedabu.dutyhelper;
 
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.NotificationCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import com.example.mohammedabu.dutyhelper.dbHelpers.TaskModel;
+import com.example.mohammedabu.dutyhelper.dbHelpers.UserHelper;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Mohammed on 25/09/2017.
  */
 
 public class CreateFragment extends Fragment {
+    private static final int uniqueID = 45612;
+    private final String TAG = "CreateFragment";
     ImageButton datePicker;
     Button cancel;
-    ImageButton today;
-    ImageButton nextWeek;
-    ImageButton tomorrow;
-    TextView date;
+    Button create;
+    ImageButton timePicker;
+    TextView taskDate;
+    TextView taskTime;
+    EditText task;
+    EditText taskDescription;
+    DatabaseReference db;
+    String userID;
+
+    //creating objects to create a notification to the user.
+    NotificationCompat.Builder notification;
+    private Spinner assigneeSpinner;
+    private Spinner pointsSpinner;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        userID = new UserHelper(FirebaseAuth.getInstance()).getUID();
+
         View view = inflater.inflate(R.layout.activity_create, container, false);
         //Creating the Spinner with the user's name into the application.
-        Spinner mySpinner = (Spinner)view.findViewById(R.id.create_UserSelection);
+        assigneeSpinner = (Spinner) view.findViewById(R.id.create_UserSelection);
         //The Strings that will use the users names from the array string in the strings.xml file in resources.
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mySpinner.setAdapter(myAdapter);
+        assigneeSpinner.setAdapter(myAdapter);
 
-        date = (TextView)view.findViewById(R.id.dob) ;
 
-        cancel = (Button)view.findViewById(R.id.buttonCancel);
+        //Creating the Spinner with the user's name into the application.
+        pointsSpinner = (Spinner) view.findViewById(R.id.create_pointsAllocated);
+        //The Strings that will use the users names from the array string in the strings.xml file in resources.
+        ArrayAdapter<String> myAdapterPoint = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.points));
+        myAdapterPoint.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pointsSpinner.setAdapter(myAdapterPoint);
+
+
+        create = (Button) view.findViewById(R.id.buttonCreate);
+
+        db = FirebaseDatabase.getInstance().getReference("events");
+
+        taskDate = (TextView) view.findViewById(R.id.taskDate);
+        taskTime = (TextView) view.findViewById(R.id.taskTime);
+
+        task = (EditText) view.findViewById(R.id.task);
+
+        taskDescription = (EditText) view.findViewById(R.id.taskDescription);
+
+        cancel = (Button) view.findViewById(R.id.buttonCancel);
         //navigating from this fragment page to the calendar page once the cancel button is clicked
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,48 +95,81 @@ public class CreateFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-        today = (ImageButton)view.findViewById(R.id.imageButtonToday);
-        today.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int actualMonth = month +1;
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                date.setText(day+"/"+actualMonth+"/"+year);
-            }
-        });
-        nextWeek = (ImageButton)view.findViewById(R.id.imageButtonNextWeek);
 
-        tomorrow = (ImageButton)view.findViewById(R.id.imageButtonTomorrow);
-        tomorrow.setOnClickListener(new View.OnClickListener() {
+        create = (Button) view.findViewById(R.id.buttonCreate);
+
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int actualMonth = month +1;
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int tomorrow = day + 1;
-                date.setText(tomorrow+"/"+actualMonth+"/"+year);
+                addProduct();
+
+                notification = new NotificationCompat.Builder(getContext());
+                notification.setAutoCancel(true);
+                createNotification();
             }
         });
 
-        datePicker = (ImageButton)view.findViewById(R.id.imageButtonDatePicker);
+        timePicker = (ImageButton) view.findViewById(R.id.imageButtonTimePicker);
+        timePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timeDialog = new TimeFragment();
+                timeDialog.show(getFragmentManager(), "TimePicker");
+            }
+        });
+
+
+        datePicker = (ImageButton) view.findViewById(R.id.imageButtonDatePicker);
         //popping the datePicker dialogue when select date is pressed.
         datePicker.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                DialogFragment newFragment = new DateFragment();
-                newFragment.show(getFragmentManager(), "DatePicker");
+                DialogFragment dateDialog = new DateFragment();
+                dateDialog.show(getFragmentManager(), "DatePicker");
 
             }
         });
 
         return view;
+    }
+
+    private void addProduct() {
+        String date = taskDate.getText().toString().trim();
+        String name = task.getText().toString().trim();
+        String description = taskDescription.getText().toString().trim();
+        String time = taskTime.getText().toString().trim();
+        int points = Integer.parseInt(pointsSpinner.getSelectedItem().toString());
+        String assignee = assigneeSpinner.getSelectedItem().toString();
+
+
+        if (!(TextUtils.isEmpty(name) && TextUtils.isEmpty(date))) {
+            String id = db.push().getKey();
+            TaskModel event = new TaskModel(name, date, time, description, points, assignee, userID + id);// TODO edit to add points and assignee
+            db.child(userID + id).setValue(event);
+            task.setText("");
+            taskTime.setText("");
+            taskDescription.setText("");
+            taskDescription.setText("");
+            Toast.makeText(getActivity(), "Event added", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "Please enter event details", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void createNotification() {
+        //specifying the notification's attributes
+        notification.setSmallIcon(R.drawable.logo5);
+        notification.setTicker("This is the ticker");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("Task Created");
+
+        //Building the notification and issue it.
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
+        if (notificationManager != null) {
+            notificationManager.notify(uniqueID, notification.build());
+        }
     }
 
 }

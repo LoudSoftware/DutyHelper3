@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "738994784108-t1246s55v6naapjrkvp1l5320if9cato.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mohammedabu.dutyhelper",
+            "certificate_hash": "944a656897574cd6f2f389dc139d7dfca07668a9"
+          }
+        },
+        {
           "client_id": "738994784108-l5o7nosv39gg42g089heg1o4umls761t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Rewards"
+        android:text="@string/reward"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintBottom_toTopOf="@+id/textView40"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +26,13 @@
         android:id="@+id/textView40"
         android:layout_width="wrap_content"
         android:layout_height="31dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Your current points is :"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.381"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
@@ -74,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Junk food: 25XP" />
+                        android:text="@string/reward_junkfod" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -99,7 +100,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Game Session: 50XP" />
+                        android:text="@string/reward_gamesession" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -124,7 +125,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Skip a Chore: 100XP" />
+                        android:text="@string/reward_nochore" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -149,7 +150,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Have Dessert before Supper: 200XP" />
+                        android:text="@string/reward_dessertbefore" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -167,14 +168,14 @@
                         android:id="@+id/imageButton18"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                        app:srcCompat="@drawable/ticket" />
 
                     <TextView
                         android:id="@+id/textView37"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Cinema Tickets: 350XP" />
+                        android:text="@string/reward_cinema" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -192,14 +193,14 @@
                         android:id="@+id/imageButton19"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
-                        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                        app:srcCompat="@drawable/money" />
 
                     <TextView
                         android:id="@+id/textView38"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="$10: 750XP" />
+                        android:text="@string/reward_money" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

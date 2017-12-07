@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mohammedabu.dutyhelper.R;
-
 /**
  * Created by Mohammed on 25/09/2017.
  */
@@ -17,7 +15,7 @@ public class TasksFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_tasks,container, false);
+        View view = inflater.inflate(R.layout.activity_tasks, container, false);
         return view;
     }
 
