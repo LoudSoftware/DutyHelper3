@@ -2,9 +2,7 @@ package com.example.mohammedabu.dutyhelper;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
@@ -24,7 +20,6 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -35,19 +30,11 @@ import static android.app.Activity.RESULT_CANCELED;
 
 public class PeopleFragment extends Fragment {
 
-
-    private static final String IMAGE0 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile1.png";
-    private static final String IMAGE1 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile2.png";
-    private static final String IMAGE2 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile3.png";
-    private static final String IMAGE3 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile4.png";
-    private static final String IMAGE4 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile5.png";
-    private static final String IMAGE5 = "gs://loginui-betterversion.appspot.com/Default Profile Pictures/profile6.png";
-
     ImageButton settingsButton;
     PieChart pieChart;
     ImageButton profileImage;
-    private FirebaseAuth mAuth;
     TextView fullName;
+    private FirebaseAuth mAuth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,7 +62,7 @@ public class PeopleFragment extends Fragment {
 
 
         /**
-         * The code below, until line 75 is to create the Pie chart seen in activity_people2.xml
+         * The code below, until line 107 is to create the Pie chart seen in activity_people2.xml
          **/
         pieChart = (PieChart) view.findViewById(R.id.profileStats);
         pieChart.setUsePercentValues(true);
@@ -130,15 +117,6 @@ public class PeopleFragment extends Fragment {
      */
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            //TODO create a method to hack the photo from the profile in here
-/*            profileImage.setImageURI(null);
-
-            Glide
-                    .with(getContext())
-                    .load(user.getPhotoUrl()) // the uri you got from Firebase
-                    .centerCrop()
-                    .into(profileImage);
-            profileImage.setImageURI(user.getPhotoUrl());*/
             fullName.setText(user.getDisplayName());
         }
     }
@@ -177,7 +155,6 @@ public class PeopleFragment extends Fragment {
         int resID = getResources().getIdentifier(drawableName, "drawable",
                 getActivity().getPackageName());
         avatarImage.setImageResource(resID);
-//        Glide.with(this.getView().getContext()).load(mAuth.getCurrentUser().getPhotoUrl()).into(profileImage); //TODO fix this
     }
 }
 

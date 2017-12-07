@@ -1,16 +1,14 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
-/**
- * Created by XavOli-Idea on 12/5/2017.
- */
-
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-
 import com.example.mohammedabu.dutyhelper.R;
 
+/**
+ * Acts as the viewHolder for a calendar Task displayed in the REcyclerView
+ */
 public class CalendarTaskHolder extends RecyclerView.ViewHolder {
 
     private final TextView title;

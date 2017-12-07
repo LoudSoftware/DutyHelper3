@@ -1,6 +1,5 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
-import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -12,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by nicoz on 15-Nov-17.
+ * Helper class to fetch info about a FireBaseAuth user
  */
 
 public class UserHelper {

@@ -1,7 +1,7 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
 /**
- * Created by XavOli-Idea on 12/5/2017.
+ * Deprecated due to it being the same as TaskModel
  */
 @Deprecated
 public class CalendarTaskModel {
@@ -22,45 +22,44 @@ public class CalendarTaskModel {
         this.eventDescription = eventDescription;
     }
 
-
-    public void setId(String taskID) {
-        this.taskID = taskID;
-    }
-
     public String getId() {
         return taskID;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setId(String taskID) {
+        this.taskID = taskID;
     }
 
     public String getEventName() {
         return eventName;
     }
 
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
     }
 
     public String getEventDescription() {
         return eventDescription;
     }
 
-    public void setTime(String eventTime) {
-        this.eventTime = eventTime;
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     public String getTime() {
         return eventTime;
+    }
+
+    public void setTime(String eventTime) {
+        this.eventTime = eventTime;
     }
 
 }

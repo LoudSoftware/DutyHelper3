@@ -1,10 +1,11 @@
 package com.example.mohammedabu.dutyhelper.dbHelpers;
 
 /**
- * Created by Fiona on 2017-11-27.
+ * Class Representation of a task object in database that
+ * FireBase uses to display it in a RecyclerView
  */
 
-//maybe this should've gone somewhere else..?
+
 
 public class TaskModel{
     private String uid;
@@ -36,10 +37,6 @@ public class TaskModel{
         this.eventPoints = eventPoints;
     }
 
-    public void setCompleted(boolean status) {
-        this.completed = status;
-    }
-
     public void setId(String taskID) {
         this.uid = taskID;
     }
@@ -48,56 +45,60 @@ public class TaskModel{
         return uid;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
     public String getEventName() {
         return eventName;
     }
 
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
     }
 
     public String getEventDescription() {
         return eventDescription;
     }
 
-    public void setPoints(int eventPoints) {
-        this.eventPoints = eventPoints;
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 
     public int getPoints() {
         return eventPoints;
     }
 
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
+    public void setPoints(int eventPoints) {
+        this.eventPoints = eventPoints;
     }
 
     public String getAssignee() {
         return assignee;
     }
 
-    public void setTime(String eventTime) {
-        this.eventTime = eventTime;
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
     }
 
     public String getTime() {
         return eventTime;
     }
 
+    public void setTime(String eventTime) {
+        this.eventTime = eventTime;
+    }
+
     public boolean getCompleted() {
         return completed;
+    }
+
+    public void setCompleted(boolean status) {
+        this.completed = status;
     }
 
 }

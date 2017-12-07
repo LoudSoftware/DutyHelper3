@@ -1,12 +1,10 @@
 package com.example.mohammedabu.dutyhelper.Authentication;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +24,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * This is the Login class, it holds the code that handles the userr login logic
+ */
 public class Login extends AppCompatActivity{
 
     private static final String TAG = "LoginScreen";
@@ -35,6 +36,24 @@ public class Login extends AppCompatActivity{
     private TextView registerLink;
     private FirebaseUser firebaseUser;
     private FirebaseAuth mAuth;
+    private TextWatcher mTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            // check Fields For Empty Values
+            checkFieldsForEmptyValues();
+        }
+    };
+
+    //Tool to allow checking if the EditText field has been filled or not. Enabling and disabling
+    // the login button in the application accordingly.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,27 +101,8 @@ public class Login extends AppCompatActivity{
         });
     }
 
-    //Tool to allow checking if the EditText field has been filled or not. Enabling and disabling
-    // the login button in the application accordingly.
-
-    private TextWatcher mTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            // check Fields For Empty Values
-            checkFieldsForEmptyValues();
-        }
-    };
-
     void checkFieldsForEmptyValues(){
-       tvLogin = (Button) findViewById(R.id.tvLogin);
+        tvLogin = (Button) findViewById(R.id.tvLogin);
 
         String s1 = userEmail.getText().toString();
         String s2 = userPassword.getText().toString();

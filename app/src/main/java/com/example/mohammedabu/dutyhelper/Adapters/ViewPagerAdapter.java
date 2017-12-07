@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by nicoz on 02-Dec-17.
+ * Custom ViewPagerAdapter to make the RecyclerView work
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {

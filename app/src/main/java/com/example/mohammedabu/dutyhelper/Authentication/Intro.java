@@ -2,9 +2,7 @@ package com.example.mohammedabu.dutyhelper.Authentication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +18,9 @@ import android.widget.TextView;
 
 import com.example.mohammedabu.dutyhelper.R;
 
+/**
+ * This is the Intro Class, it holds the code to handle the introduction tutorial
+ */
 public class Intro extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -28,6 +29,34 @@ public class Intro extends AppCompatActivity {
     private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            addBottomDots(position);
+
+            // changing the next button text 'NEXT' / 'GOT IT'
+            if (position == layouts.length - 1) {
+                // last page. make button text to GOT IT
+                btnNext.setText(getString(R.string.start));
+                btnSkip.setVisibility(View.GONE);
+            } else {
+                // still pages are left
+                btnNext.setText(getString(R.string.next));
+                btnSkip.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +86,11 @@ public class Intro extends AppCompatActivity {
 
     }
 
-
-    public  void btnSkipClick(View v)
-    {
+    public  void btnSkipClick(View v) {
         launchHomeScreen();
     }
 
-    public  void btnNextClick(View v)
-    {
+    public  void btnNextClick(View v) {
         // checking for last page
         // if last page home screen will be launched
         int current = getItem(1);
@@ -76,34 +102,30 @@ public class Intro extends AppCompatActivity {
         }
     }
 
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[layouts.length];
 
-        @Override
-        public void onPageSelected(int position) {
-            addBottomDots(position);
-
-            // changing the next button text 'NEXT' / 'GOT IT'
-            if (position == layouts.length - 1) {
-                // last page. make button text to GOT IT
-                btnNext.setText(getString(R.string.start));
-                btnSkip.setVisibility(View.GONE);
-            } else {
-                // still pages are left
-                btnNext.setText(getString(R.string.next));
-                btnSkip.setVisibility(View.VISIBLE);
-            }
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(getResources().getColor(R.color.dot_light));
+            dotsLayout.addView(dots[i]);
         }
 
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(getResources().getColor(R.color.dot_dark));
+    }
 
-        }
+    private int getItem(int i) {
+        return viewPager.getCurrentItem() + i;
+    }
 
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
-
-        }
-    };
+    private void launchHomeScreen() {
+        startActivity(new Intent(this, Login.class));
+        finish();
+    }
 
     public class ViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
@@ -139,33 +161,6 @@ public class Intro extends AppCompatActivity {
             View view = (View) object;
             container.removeView(view);
         }
-    }
-
-    private void addBottomDots(int currentPage) {
-        dots = new TextView[layouts.length];
-
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.dot_light));
-            dotsLayout.addView(dots[i]);
-        }
-
-        if (dots.length > 0)
-            dots[currentPage].setTextColor(getResources().getColor(R.color.dot_dark));
-    }
-
-
-
-    private int getItem(int i) {
-        return viewPager.getCurrentItem() + i;
-    }
-
-    private void launchHomeScreen() {
-        startActivity(new Intent(this, Login.class));
-        finish();
     }
 
 }

@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mohammedabu.dutyhelper.MainActivity;
 import com.example.mohammedabu.dutyhelper.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+/**
+ * RegisterActivity handles new user creation logic
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
@@ -55,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //signup();
+
                 registerUser();
             }
         });
@@ -73,7 +75,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * This was an attempt to show a progressDialog during signup
+     */
+    @Deprecated
     public void signup() {
         Log.d(TAG, "Signup");
 
@@ -96,6 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
         String Email = userEmail.getText().toString().trim();
         String Password = userPassword.getText().toString().trim();
         final String name = userName.getText().toString().trim();
+
+        // Checking if the required text Fields are empty
         if (TextUtils.isEmpty(Email)) {
             Toast.makeText(this, "Email field is empty", Toast.LENGTH_LONG).show();
             return;
@@ -118,22 +125,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //check if successful
                             if (task.isSuccessful()) {
                                 //User is successfully registered to the data base
-                                /**
-                                 //the dialog that shows up when the user creates an account
-                                 final ProgressDialog progressDialog = new ProgressDialog(RegisterActivity.this,
-                                 R.style.AppTheme_Dark_Dialog);
-                                 progressDialog.setIndeterminate(true);
-                                 progressDialog.setMessage("Creating Account...");
-                                 progressDialog.show();
 
-
-                                 new android.os.Handler().postDelayed(
-                                 new Runnable() {
-                                 public void run() {
-                                 progressDialog.dismiss();
-                                 }
-                                 }, 3000);
-                                 **/
                                 //Create the account successful and take user to the Login screen
                                 finish();
 
