@@ -1,5 +1,4 @@
 *.iml
-!DutyHelper3.iml
 .gradle
 /local.properties
 /.idea/workspace.xml
