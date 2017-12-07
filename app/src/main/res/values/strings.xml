@@ -17,11 +17,10 @@
 
     <!-- Points Associated per Task-->
     <string-array name="points">
-        <item> 1 </item>
-        <item> 2 </item>
-        <item> 3 </item>
-        <item> 4 </item>
         <item> 5 </item>
+        <item> 10 </item>
+        <item> 15 </item>
+        <item> 20 </item>
     </string-array>
 
 
@@ -92,4 +91,12 @@
     <string name="taskHintName">Enter the task name</string>
     <string name="update" />
     <string name="updateButton">update</string>
+    <string name="reward_junkfod">Junk food: 25XP</string>
+    <string name="reward_gamesession">Game Session: 50XP</string>
+    <string name="reward_nochore">Skip a Chore: 100XP</string>
+    <string name="reward_dessertbefore">Have dessert before Supper: 200XP</string>
+    <string name="reward_cinema">Cinema Tickets: 300XP</string>
+    <string name="reward_money">$10: 500XP</string>
+    <string name="promptAvatarSel">Select a new Avatar</string>
+    <string name="logoutButton">Logout</string>
 </resources>
